@@ -1,80 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
 
-    <!-- Mobile / Responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <!-- SEO -->
     <meta
         name="description"
-        content="Note.Arsin — Discover musical notes, instruments, tutorials and music."
+        content="Note.Arsin — A modern platform for musical notes, music learning, instruments and tutorials."
     >
-    <meta name="author" content="Note.Arsin">
+
+    <meta
+        name="theme-color"
+        content="#0b0b0f"
+    >
 
     <title>Note.Arsin | Music & Notes</title>
 
-    <!-- CSS -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- =========================
+         HEADER
+    ========================== -->
     <header class="site-header">
 
         <div class="container header-container">
 
-            <!-- Logo -->
-            <a href="index.html" class="logo">
-                <span class="logo-icon">♪</span>
-                <span class="logo-text">Note<span>.Arsin</span></span>
+            <a href="index.html" class="brand" aria-label="Note.Arsin Home">
+                <span class="brand-icon">♪</span>
+                <span class="brand-name">Note.Arsin</span>
             </a>
 
-            <!-- Navigation -->
-            <nav class="main-nav" id="mainNav">
+            <nav class="main-navigation" aria-label="Main navigation">
 
-                <a href="#home" class="nav-link active">
-                    Home
-                </a>
-
-                <a href="#notes" class="nav-link">
-                    Notes
-                </a>
-
-                <a href="#instruments" class="nav-link">
-                    Instruments
-                </a>
-
-                <a href="#tutorials" class="nav-link">
-                    Tutorials
-                </a>
-
-                <a href="#about" class="nav-link">
-                    About
-                </a>
+                <a href="#home">Home</a>
+                <a href="#notes">Notes</a>
+                <a href="#instruments">Instruments</a>
+                <a href="#tutorials">Tutorials</a>
 
             </nav>
 
-            <!-- Header Actions -->
             <div class="header-actions">
 
                 <button
-                    class="icon-button"
-                    id="searchButton"
+                    class="search-button"
                     type="button"
                     aria-label="Search"
+                    id="searchButton"
                 >
                     🔍
                 </button>
 
                 <button
                     class="menu-button"
-                    id="menuButton"
                     type="button"
                     aria-label="Open menu"
-                    aria-expanded="false"
+                    id="menuButton"
                 >
                     ☰
                 </button>
@@ -86,10 +74,25 @@
     </header>
 
 
-    <!-- ================= MAIN ================= -->
+    <!-- =========================
+         MOBILE MENU
+    ========================== -->
+    <div class="mobile-menu" id="mobileMenu">
+
+        <a href="#home">Home</a>
+        <a href="#notes">Notes</a>
+        <a href="#instruments">Instruments</a>
+        <a href="#tutorials">Tutorials</a>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
     <main>
 
-        <!-- ================= HERO ================= -->
+        <!-- HERO -->
         <section class="hero" id="home">
 
             <div class="container hero-container">
@@ -101,16 +104,18 @@
                     </span>
 
                     <h1>
-                        Discover the
-                        <span>Language of Music</span>
+                        Learn Music.
+                        <span>Read Notes.</span>
+                        Play Better.
                     </h1>
 
                     <p>
-                        Explore musical notes, instruments, tutorials,
-                        and everything you need to understand and enjoy music.
+                        Note.Arsin is a modern platform for discovering
+                        musical notes, learning instruments and improving
+                        your musical skills.
                     </p>
 
-                    <div class="hero-buttons">
+                    <div class="hero-actions">
 
                         <a href="#notes" class="button button-primary">
                             Explore Notes
@@ -124,33 +129,25 @@
 
                 </div>
 
-                <!-- Musical Visual -->
-                <div class="hero-visual">
+                <div class="hero-visual" aria-hidden="true">
 
                     <div class="music-card">
 
                         <div class="music-card-top">
-                            <span>♪</span>
-                            <span>Note.Arsin</span>
+                            <span>♫</span>
+                            <span>NOTE.Arsin</span>
                         </div>
 
                         <div class="staff">
-
-                            <span>♪</span>
-                            <span>♫</span>
-                            <span>♬</span>
-                            <span>♪</span>
-
+                            ─────────────────
+                            ─────────────────
+                            ─────────────────
+                            ─────────────────
+                            ─────────────────
                         </div>
 
-                        <div class="music-info">
-
-                            <strong>Music starts with a note.</strong>
-
-                            <small>
-                                Learn • Play • Create
-                            </small>
-
+                        <div class="music-notes">
+                            ♪ ♫ ♪ ♬
                         </div>
 
                     </div>
@@ -162,7 +159,7 @@
         </section>
 
 
-        <!-- ================= NOTES ================= -->
+        <!-- NOTES -->
         <section class="section" id="notes">
 
             <div class="container">
@@ -174,12 +171,12 @@
                     </span>
 
                     <h2>
-                        Learn the basics of notes
+                        Explore Musical Notes
                     </h2>
 
                     <p>
-                        Understand the foundation of music and discover
-                        how musical notes work.
+                        Discover notes, scales and musical concepts
+                        in a simple and modern way.
                     </p>
 
                 </div>
@@ -189,96 +186,60 @@
 
                     <article class="note-card">
 
-                        <div class="note-icon">
-                            ♪
-                        </div>
+                        <span class="note-symbol">♪</span>
 
                         <h3>
-                            Do
+                            Basic Notes
                         </h3>
 
                         <p>
-                            The first note in the basic musical scale.
+                            Learn the fundamental musical notes
+                            and their positions.
                         </p>
 
-                        <button
-                            class="learn-button"
-                            data-note="Do"
-                        >
-                            Learn More →
-                        </button>
+                        <a href="#" class="card-link">
+                            Learn more →
+                        </a>
 
                     </article>
 
 
                     <article class="note-card">
 
-                        <div class="note-icon">
-                            ♫
-                        </div>
+                        <span class="note-symbol">♫</span>
 
                         <h3>
-                            Re
+                            Scales
                         </h3>
 
                         <p>
-                            A fundamental note used in many melodies.
+                            Explore major and minor scales
+                            step by step.
                         </p>
 
-                        <button
-                            class="learn-button"
-                            data-note="Re"
-                        >
-                            Learn More →
-                        </button>
+                        <a href="#" class="card-link">
+                            Explore scales →
+                        </a>
 
                     </article>
 
 
                     <article class="note-card">
 
-                        <div class="note-icon">
-                            ♬
-                        </div>
+                        <span class="note-symbol">♬</span>
 
                         <h3>
-                            Mi
+                            Chords
                         </h3>
 
                         <p>
-                            One of the seven basic notes of music.
+                            Understand chords and how they
+                            are constructed.
                         </p>
 
-                        <button
-                            class="learn-button"
-                            data-note="Mi"
-                        >
-                            Learn More →
-                        </button>
-
-                    </article>
-
-
-                    <article class="note-card">
-
-                        <div class="note-icon">
-                            ♪
-                        </div>
-
-                        <h3>
-                            Fa
-                        </h3>
-
-                        <p>
-                            A key part of melodies and musical scales.
-                        </p>
-
-                        <button
-                            class="learn-button"
-                            data-note="Fa"
-                        >
-                            Learn More →
-                        </button>
+                        <a href="#" class="card-link">
+                            Discover chords →
+                        </a>
 
                     </article>
 
@@ -289,7 +250,7 @@
         </section>
 
 
-        <!-- ================= INSTRUMENTS ================= -->
+        <!-- INSTRUMENTS -->
         <section class="section section-dark" id="instruments">
 
             <div class="container">
@@ -301,12 +262,12 @@
                     </span>
 
                     <h2>
-                        Explore instruments
+                        Choose Your Instrument
                     </h2>
 
                     <p>
-                        Discover instruments and learn about their sounds,
-                        notes, and techniques.
+                        Learn music based on the instrument
+                        you love.
                     </p>
 
                 </div>
@@ -315,86 +276,30 @@
                 <div class="instrument-grid">
 
                     <article class="instrument-card">
-
-                        <div class="instrument-icon">
-                            🎹
-                        </div>
-
-                        <h3>
-                            Piano
-                        </h3>
-
-                        <p>
-                            Explore piano notes and basic techniques.
-                        </p>
-
-                        <a href="#" class="card-link">
-                            Explore →
-                        </a>
-
+                        <div class="instrument-icon">🎹</div>
+                        <h3>Piano</h3>
+                        <p>Notes, chords and piano lessons.</p>
                     </article>
 
 
                     <article class="instrument-card">
-
-                        <div class="instrument-icon">
-                            🎸
-                        </div>
-
-                        <h3>
-                            Guitar
-                        </h3>
-
-                        <p>
-                            Learn guitar notes, chords, and techniques.
-                        </p>
-
-                        <a href="#" class="card-link">
-                            Explore →
-                        </a>
-
+                        <div class="instrument-icon">🎸</div>
+                        <h3>Guitar</h3>
+                        <p>Chords, tabs and guitar lessons.</p>
                     </article>
 
 
                     <article class="instrument-card">
-
-                        <div class="instrument-icon">
-                            🥁
-                        </div>
-
-                        <h3>
-                            Drums
-                        </h3>
-
-                        <p>
-                            Discover rhythm and percussion basics.
-                        </p>
-
-                        <a href="#" class="card-link">
-                            Explore →
-                        </a>
-
+                        <div class="instrument-icon">🎻</div>
+                        <h3>Violin</h3>
+                        <p>Notes and techniques for violin.</p>
                     </article>
 
 
                     <article class="instrument-card">
-
-                        <div class="instrument-icon">
-                            🎻
-                        </div>
-
-                        <h3>
-                            Violin
-                        </h3>
-
-                        <p>
-                            Learn about violin notes and techniques.
-                        </p>
-
-                        <a href="#" class="card-link">
-                            Explore →
-                        </a>
-
+                        <div class="instrument-icon">🥁</div>
+                        <h3>Drums</h3>
+                        <p>Rhythm, beats and drum lessons.</p>
                     </article>
 
                 </div>
@@ -404,7 +309,7 @@
         </section>
 
 
-        <!-- ================= TUTORIALS ================= -->
+        <!-- TUTORIALS -->
         <section class="section" id="tutorials">
 
             <div class="container">
@@ -416,55 +321,71 @@
                     </span>
 
                     <h2>
-                        Learn music step by step
+                        Learn Music Step by Step
                     </h2>
 
                     <p>
-                        Beginner-friendly lessons designed to help you
-                        understand music.
+                        Structured lessons designed to make
+                        learning music easier.
                     </p>
 
                 </div>
 
 
-                <div class="tutorial-layout">
+                <div class="learning-grid">
 
-                    <div class="tutorial-content">
+                    <article class="learning-card">
+
+                        <span class="learning-number">
+                            01
+                        </span>
 
                         <h3>
-                            Start with the fundamentals
+                            Learn the Notes
                         </h3>
 
                         <p>
-                            Learn notes, scales, rhythm, chords, and
-                            musical notation through simple lessons.
+                            Understand the musical alphabet
+                            and note positions.
                         </p>
 
-                        <a href="#" class="button button-primary">
-                            View Tutorials
-                        </a>
-
-                    </div>
+                    </article>
 
 
-                    <div class="tutorial-statistics">
+                    <article class="learning-card">
 
-                        <div class="stat">
-                            <strong>7</strong>
-                            <span>Basic Notes</span>
-                        </div>
+                        <span class="learning-number">
+                            02
+                        </span>
 
-                        <div class="stat">
-                            <strong>4+</strong>
-                            <span>Instruments</span>
-                        </div>
+                        <h3>
+                            Understand Rhythm
+                        </h3>
 
-                        <div class="stat">
-                            <strong>∞</strong>
-                            <span>Music</span>
-                        </div>
+                        <p>
+                            Learn beats, timing and
+                            musical rhythm.
+                        </p>
 
-                    </div>
+                    </article>
+
+
+                    <article class="learning-card">
+
+                        <span class="learning-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Play Music
+                        </h3>
+
+                        <p>
+                            Put everything together and
+                            start playing.
+                        </p>
+
+                    </article>
 
                 </div>
 
@@ -473,28 +394,30 @@
         </section>
 
 
-        <!-- ================= ABOUT ================= -->
-        <section class="section about-section" id="about">
+        <!-- CTA -->
+        <section class="cta-section">
 
-            <div class="container about-container">
+            <div class="container">
 
-                <div>
+                <div class="cta-box">
 
                     <span class="section-label">
-                        ABOUT NOTE.ARSIN
+                        NOTE.ARSIN
                     </span>
 
                     <h2>
-                        Music made easier.
+                        Your Music Journey Starts Here.
                     </h2>
 
-                </div>
+                    <p>
+                        Learn. Practice. Play.
+                    </p>
 
-                <p>
-                    Note.Arsin is a music-focused platform designed to
-                    make learning musical notes, instruments, and music
-                    theory easier and more enjoyable.
-                </p>
+                    <a href="#notes" class="button button-primary">
+                        Explore Note.Arsin
+                    </a>
+
+                </div>
 
             </div>
 
@@ -503,22 +426,22 @@
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- =========================
+         FOOTER
+    ========================== -->
     <footer class="site-footer">
 
         <div class="container footer-container">
 
-            <div class="footer-brand">
+            <div>
 
-                <a href="index.html" class="logo">
-                    <span class="logo-icon">♪</span>
-                    <span class="logo-text">
-                        Note<span>.Arsin</span>
-                    </span>
+                <a href="index.html" class="brand">
+                    <span class="brand-icon">♪</span>
+                    <span class="brand-name">Note.Arsin</span>
                 </a>
 
                 <p>
-                    Discover music. Learn notes. Create something amazing.
+                    Music, notes and learning.
                 </p>
 
             </div>
@@ -533,23 +456,23 @@
 
             </div>
 
+        </div>
 
-            <div class="footer-bottom">
 
-                <p>
-                    © <span id="currentYear"></span> Note.Arsin.
-                    All rights reserved.
-                </p>
+        <div class="container copyright">
 
-            </div>
+            <p>
+                © <span id="currentYear"></span> Note.Arsin.
+                All rights reserved.
+            </p>
 
         </div>
 
     </footer>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
-    <script src="js/main.js"></script>
+    <!-- Main JavaScript -->
+    <script src="js/main.js" defer></script>
 
 </body>
 </html>
