@@ -176,50 +176,6 @@ const translations = {
 
 let currentLanguage = "fa";
 
-function setLanguage(language) {
-  currentLanguage = language;
-
-  const isEnglish = language === "en";
-
-  document.documentElement.lang = language;
-  document.documentElement.dir = isEnglish ? "ltr" : "rtl";
-
-  document.querySelectorAll("[data-i18n]").forEach(element => {
-    const key = element.dataset.i18n;
-
-    if (translations[language][key]) {
-      element.textContent = translations[language][key];
-    }
-  });
-
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
-    const key = element.dataset.i18nPlaceholder;
-
-    if (translations[language][key]) {
-      element.placeholder = translations[language][key];
-    }
-  });
-
-  if (languageBtn) {
-    languageBtn.textContent = isEnglish ? "فارسی" : "English";
-  }
-
-  if (searchInput) {
-    searchInput.placeholder = translations[language].search;
-  }
-
-  renderSongs(getFilteredSongs());
-}
-
-if (languageBtn) {
-  languageBtn.addEventListener("click", () => {
-    setLanguage(currentLanguage === "fa" ? "en" : "fa");
-  });
-}
-
-
-// ---------- Theme ----------
-
 function setTheme(theme) {
   const isLight = theme === "light";
 
@@ -227,9 +183,16 @@ function setTheme(theme) {
 
   if (themeBtn) {
     themeBtn.textContent = isLight ? "🌙" : "☀️";
-    themeBtn.setAttribute(
-      "aria-label",
-      isLight ? "Switch to dark mode" : "Switch to light mode"
+  }
+}
+
+if (themeBtn) {
+  themeBtn.addEventListener("click", () => {
+    const isLight = document.body.classList.contains("light");
+
+    setTheme(isLight ? "dark" : "light");
+  });
+}
     );
   }
 }
