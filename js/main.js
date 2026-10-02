@@ -1,11 +1,13 @@
 
-/* =====================================
-   Note.Arsin
-   Main JavaScript
-   Supabase + Language + Theme
-===================================== */
+/* ==========================================
+   NOTE.ARSIN
+   Database + Theme + Language + Mobile Menu
+========================================== */
 
-// ---------- Supabase ----------
+
+// ==========================================
+// 1. SUPABASE DATABASE
+// ==========================================
 
 const SUPABASE_URL =
   "https://hpwfxxrmrfdljakssisq.supabase.co";
@@ -19,21 +21,27 @@ const db = window.supabase.createClient(
 );
 
 
-// ---------- Elements ----------
+// ==========================================
+// 2. HTML ELEMENTS
+// ==========================================
 
 const songGrid = document.getElementById("songGrid");
 const songCount = document.getElementById("songCount");
 const searchInput = document.getElementById("searchInput");
 
 const themeBtn = document.getElementById("themeBtn");
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
 const languageBtn = document.getElementById("languageBtn");
 
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
 let allSongs = [];
+let currentLanguage = "fa";
 
 
-// ---------- Translations ----------
+// ==========================================
+// 3. LANGUAGE TRANSLATIONS
+// ==========================================
 
 const translations = {
   fa: {
@@ -47,6 +55,7 @@ const translations = {
     welcome: "دنیای موسیقی، یادگیری و خلاقیت",
     welcomeText:
       "به Note.Arsin خوش آمدید؛ فضایی برای کشف موسیقی، یادداشت‌های آموزشی و تجربه‌های تازه.",
+
     start: "شروع کاوش",
 
     musicTitle: "موسیقی امروز",
@@ -90,17 +99,15 @@ const translations = {
 
     aboutTitle: "درباره Note.Arsin",
     aboutText:
-      "Note.Arsin پروژه‌ای برای ترکیب موسیقی، آموزش و خلاقیت است. این وب‌سایت به‌تدریج توسعه پیدا می‌کند و امکانات جدیدی به آن اضافه خواهد شد.",
+      "Note.Arsin پروژه‌ای برای ترکیب موسیقی، آموزش و خلاقیت است.",
 
     search: "جست‌وجوی نام آهنگ یا خواننده...",
-    loading: "در حال دریافت آهنگ‌ها از دیتابیس...",
+    loading: "در حال دریافت آهنگ‌ها...",
     noSongs: "آهنگی برای نمایش پیدا نشد.",
     noAudio: "فایل صوتی هنوز ثبت نشده است.",
-    connectionError: "خطا در دریافت اطلاعات دیتابیس.",
+    connectionError: "خطا در اتصال به دیتابیس.",
     unknownArtist: "نامشخص",
-    noDescription: "بدون توضیحات",
-    explore: "شروع کاوش",
-    footer: "ساخته‌شده با علاقه به موسیقی و یادگیری"
+    noDescription: "بدون توضیحات"
   },
 
   en: {
@@ -114,6 +121,7 @@ const translations = {
     welcome: "Music, Learning & Creativity",
     welcomeText:
       "Welcome to Note.Arsin, a place to discover music, learning notes, and new experiences.",
+
     start: "Explore",
 
     musicTitle: "Today's Music",
@@ -157,24 +165,71 @@ const translations = {
 
     aboutTitle: "About Note.Arsin",
     aboutText:
-      "Note.Arsin is a project combining music, education, and creativity. New features will be added gradually.",
+      "Note.Arsin is a project combining music, education, and creativity.",
 
     search: "Search songs or artists...",
-    loading: "Loading songs from database...",
+    loading: "Loading songs...",
     noSongs: "No songs found.",
     noAudio: "Audio file is not available yet.",
-    connectionError: "Could not load database information.",
+    connectionError: "Database connection error.",
     unknownArtist: "Unknown",
-    noDescription: "No description",
-    explore: "Explore",
-    footer: "Made with a passion for music and learning"
+    noDescription: "No description"
   }
 };
 
 
-// ---------- Language ----------
+// ==========================================
+// 4. LANGUAGE SWITCH
+// ==========================================
 
-let currentLanguage = "fa";
+function setLanguage(language) {
+  currentLanguage = language;
+
+  const english = language === "en";
+
+  document.documentElement.lang = language;
+  document.documentElement.dir = english ? "ltr" : "rtl";
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    const key = element.dataset.i18n;
+
+    if (translations[language][key]) {
+      element.textContent = translations[language][key];
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
+    const key = element.dataset.i18nPlaceholder;
+
+    if (translations[language][key]) {
+      element.placeholder = translations[language][key];
+    }
+  });
+
+  if (languageBtn) {
+    languageBtn.textContent = english ? "فارسی" : "English";
+  }
+
+  if (searchInput) {
+    searchInput.placeholder = translations[language].search;
+  }
+
+  renderSongs(getFilteredSongs());
+}
+
+if (languageBtn) {
+  languageBtn.addEventListener("click", () => {
+    const nextLanguage =
+      currentLanguage === "fa" ? "en" : "fa";
+
+    setLanguage(nextLanguage);
+  });
+}
+
+
+// ==========================================
+// 5. LIGHT / DARK THEME
+// ==========================================
 
 function setTheme(theme) {
   const isLight = theme === "light";
@@ -188,25 +243,17 @@ function setTheme(theme) {
 
 if (themeBtn) {
   themeBtn.addEventListener("click", () => {
-    const isLight = document.body.classList.contains("light");
-
-    setTheme(isLight ? "dark" : "light");
-  });
-}
-    );
-  }
-}
-
-if (themeBtn) {
-  themeBtn.addEventListener("click", () => {
-    const isLight = document.body.classList.contains("light");
+    const isLight =
+      document.body.classList.contains("light");
 
     setTheme(isLight ? "dark" : "light");
   });
 }
 
 
-// ---------- Mobile Menu ----------
+// ==========================================
+// 6. MOBILE MENU
+// ==========================================
 
 if (menuBtn && navLinks) {
   menuBtn.addEventListener("click", () => {
@@ -221,7 +268,9 @@ if (menuBtn && navLinks) {
 }
 
 
-// ---------- HTML Safety ----------
+// ==========================================
+// 7. HTML SAFETY
+// ==========================================
 
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -237,7 +286,10 @@ function safeUrl(value) {
   try {
     const url = new URL(value);
 
-    if (url.protocol === "https:" || url.protocol === "http:") {
+    if (
+      url.protocol === "https:" ||
+      url.protocol === "http:"
+    ) {
       return url.href;
     }
 
@@ -248,7 +300,9 @@ function safeUrl(value) {
 }
 
 
-// ---------- Search ----------
+// ==========================================
+// 8. SONG SEARCH
+// ==========================================
 
 function getFilteredSongs() {
   const term = searchInput
@@ -259,7 +313,8 @@ function getFilteredSongs() {
     const title = (song.title || "").toLowerCase();
     const artist = (song.artist || "").toLowerCase();
 
-    return title.includes(term) || artist.includes(term);
+    return title.includes(term) ||
+           artist.includes(term);
   });
 }
 
@@ -270,15 +325,16 @@ if (searchInput) {
 }
 
 
-// ---------- Render Songs ----------
+// ==========================================
+// 9. DISPLAY SONGS
+// ==========================================
 
 function renderSongs(songs) {
   if (!songGrid) return;
 
   if (songCount) {
-    songCount.textContent = `${songs.length} ${
-      currentLanguage === "fa" ? "آهنگ" : "songs"
-    }`;
+    songCount.textContent =
+      `${songs.length} ${currentLanguage === "fa" ? "آهنگ" : "songs"}`;
   }
 
   if (songs.length === 0) {
@@ -287,6 +343,7 @@ function renderSongs(songs) {
         ${translations[currentLanguage].noSongs}
       </div>
     `;
+
     return;
   }
 
@@ -350,7 +407,9 @@ function renderSongs(songs) {
 }
 
 
-// ---------- Database Connection ----------
+// ==========================================
+// 10. LOAD SONGS FROM SUPABASE
+// ==========================================
 
 async function loadSongs() {
   if (!songGrid) return;
@@ -380,21 +439,34 @@ async function loadSongs() {
   } catch (error) {
     console.error("Supabase Error:", error);
 
-    if (songGrid) {
-      songGrid.innerHTML = `
-        <div class="status">
-          ${translations[currentLanguage].connectionError}
-        </div>
-      `;
+    songGrid.innerHTML = `
+      <div class="status">
+        ${translations[currentLanguage].connectionError}
+      </div>
+    `;
+
+    if (songCount) {
+      songCount.textContent =
+        currentLanguage === "fa"
+          ? "خطا"
+          : "Error";
     }
   }
 }
 
 
-// ---------- Start ----------
+// ==========================================
+// 11. START
+// ==========================================
 
-document.addEventListener("DOMContentLoaded", () => {
+function startApp() {
   setLanguage("fa");
+  setTheme("dark");
   loadSongs();
-});
+}
 
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", startApp);
+} else {
+  startApp();
+}
