@@ -1,1 +1,305 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <meta name="theme-color" content="#101124">
+  <meta name="description" content="Note.Arsin | یادگیری موسیقی، جزوه‌ها و آموزش‌های کاربردی">
+
+  <title>Note.Arsin | خانه موسیقی</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Supabase Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Main JavaScript -->
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+
+      <a href="#home" class="logo" aria-label="Note Arsin Home">
+        <span class="logo-icon">♪</span>
+        <span class="logo-text">Note<span>.Arsin</span></span>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#home" class="nav-link" data-i18n="navHome">خانه</a>
+        <a href="#notes" class="nav-link" data-i18n="navNotes">جزوه‌ها</a>
+        <a href="#instruments" class="nav-link" data-i18n="navInstruments">سازها</a>
+        <a href="#tutorials" class="nav-link" data-i18n="navTutorials">آموزش‌ها</a>
+        <a href="#about" class="nav-link" data-i18n="navAbout">درباره ما</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button class="icon-button" id="languageToggle" type="button" aria-label="Change language">
+          EN
+        </button>
+
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle theme">
+          ☀️
+        </button>
+
+        <button class="menu-button" id="menuButton" type="button"
+          aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="container hero-container">
+
+        <div class="hero-content">
+
+          <span class="hero-badge" data-i18n="heroBadge">
+            ✦ دنیای یادگیری موسیقی
+          </span>
+
+          <h1 data-i18n="heroTitle">
+            موسیقی را
+            <span>متفاوت یاد بگیر</span>
+          </h1>
+
+          <p data-i18n="heroDescription">
+            مجموعه‌ای از جزوه‌ها، آموزش‌ها و مطالب کاربردی برای علاقه‌مندان موسیقی؛
+            همه در یک فضای ساده و زیبا.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#notes" class="button button-primary" data-i18n="heroButton">
+              شروع یادگیری
+            </a>
+
+            <a href="#about" class="button button-secondary" data-i18n="moreButton">
+              بیشتر بدانید
+            </a>
+          </div>
+
+        </div>
+
+        <div class="hero-visual">
+
+          <div class="music-card glass-card">
+
+            <div class="music-card-top">
+              <span data-i18n="musicCardTitle">موسیقی امروز</span>
+              <span class="music-card-dot"></span>
+            </div>
+
+            <div class="staff" aria-hidden="true">
+              <div class="staff-line"></div>
+              <div class="staff-line"></div>
+              <div class="staff-line"></div>
+              <div class="staff-line"></div>
+              <div class="staff-line"></div>
+
+              <span class="music-note note-one">♪</span>
+              <span class="music-note note-two">♫</span>
+              <span class="music-note note-three">♩</span>
+            </div>
+
+            <div class="music-info">
+              <strong data-i18n="musicCardName">زیبایی در نت‌ها</strong>
+              <small data-i18n="musicCardSubtitle">یادگیری، تمرین، پیشرفت</small>
+            </div>
+
+          </div>
+
+          <div class="floating-note floating-note-one">♫</div>
+          <div class="floating-note floating-note-two">♪</div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Notes -->
+    <section class="section" id="notes">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="section-label" data-i18n="notesLabel">کتابخانه یادگیری</span>
+          <h2 data-i18n="notesTitle">جزوه‌ها و منابع</h2>
+          <p data-i18n="notesDescription">
+            مطالب آموزشی را در دسته‌بندی‌های مختلف دنبال کن.
+          </p>
+        </div>
+
+        <div class="notes-grid">
+
+          <article class="note-card glass-card">
+            <div class="note-icon">🎼</div>
+            <h3 data-i18n="noteOneTitle">تئوری موسیقی</h3>
+            <p data-i18n="noteOneText">آشنایی با نت‌ها، ریتم و مفاهیم پایه موسیقی.</p>
+            <a href="#tutorials" class="learn-button" data-i18n="learnMore">مشاهده مطالب ←</a>
+          </article>
+
+          <article class="note-card glass-card">
+            <div class="note-icon">🎹</div>
+            <h3 data-i18n="noteTwoTitle">آموزش پیانو</h3>
+            <p data-i18n="noteTwoText">مفاهیم و تمرین‌های مقدماتی پیانو.</p>
+            <a href="#tutorials" class="learn-button" data-i18n="learnMore">مشاهده مطالب ←</a>
+          </article>
+
+          <article class="note-card glass-card">
+            <div class="note-icon">🎸</div>
+            <h3 data-i18n="noteThreeTitle">آشنایی با سازها</h3>
+            <p data-i18n="noteThreeText">شناخت سازها و روش شروع یادگیری آن‌ها.</p>
+            <a href="#instruments" class="learn-button" data-i18n="learnMore">مشاهده مطالب ←</a>
+          </article>
+
+          <article class="note-card glass-card">
+            <div class="note-icon">📚</div>
+            <h3 data-i18n="noteFourTitle">دانش موسیقی</h3>
+            <p data-i18n="noteFourText">مطالب تکمیلی برای علاقه‌مندان موسیقی.</p>
+            <a href="#tutorials" class="learn-button" data-i18n="learnMore">مشاهده مطالب ←</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Instruments -->
+    <section class="section section-dark" id="instruments">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="section-label" data-i18n="instrumentLabel">دنیای سازها</span>
+          <h2 data-i18n="instrumentTitle">ساز مورد علاقه‌ات را پیدا کن</h2>
+          <p data-i18n="instrumentDescription">
+            با خانواده‌های مختلف سازهای موسیقی آشنا شو.
+          </p>
+        </div>
+
+        <div class="instrument-grid">
+
+          <article class="instrument-card glass-card">
+            <div class="instrument-icon">🎹</div>
+            <h3 data-i18n="pianoTitle">پیانو</h3>
+            <p data-i18n="pianoText">آشنایی با کلاویه‌ها و اصول نوازندگی.</p>
+            <a href="#tutorials" class="card-link" data-i18n="explore">بیشتر بدانید ←</a>
+          </article>
+
+          <article class="instrument-card glass-card">
+            <div class="instrument-icon">🎸</div>
+            <h3 data-i18n="guitarTitle">گیتار</h3>
+            <p data-i18n="guitarText">شناخت آکوردها و اصول اولیه گیتار.</p>
+            <a href="#tutorials" class="card-link" data-i18n="explore">بیشتر بدانید ←</a>
+          </article>
+
+          <article class="instrument-card glass-card">
+            <div class="instrument-icon">🎻</div>
+            <h3 data-i18n="violinTitle">ویولن</h3>
+            <p data-i18n="violinText">آشنایی با سازهای زهی و آرشه‌ای.</p>
+            <a href="#tutorials" class="card-link" data-i18n="explore">بیشتر بدانید ←</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Tutorials -->
+    <section class="section" id="tutorials">
+      <div class="container tutorial-layout">
+
+        <div class="tutorial-content">
+          <span class="section-label" data-i18n="tutorialLabel">مسیر یادگیری</span>
+
+          <h2 data-i18n="tutorialTitle">قدم‌به‌قدم پیشرفت کن</h2>
+
+          <p data-i18n="tutorialDescription">
+            از مفاهیم پایه شروع کن و با تمرین منظم، دانش موسیقی خودت را گسترش بده.
+          </p>
+
+          <a href="#notes" class="button button-primary" data-i18n="viewResources">
+            دیدن منابع آموزشی
+          </a>
+        </div>
+
+        <div class="tutorial-statistics">
+
+          <div class="stat glass-card">
+            <strong>01</strong>
+            <span data-i18n="stepOne">یادگیری مفاهیم</span>
+          </div>
+
+          <div class="stat glass-card">
+            <strong>02</strong>
+            <span data-i18n="stepTwo">تمرین و تکرار</span>
+          </div>
+
+          <div class="stat glass-card">
+            <strong>03</strong>
+            <span data-i18n="stepThree">پیشرفت و تجربه</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about-section" id="about">
+      <div class="container about-container glass-card">
+
+        <span class="section-label" data-i18n="aboutLabel">درباره پروژه</span>
+
+        <h2 data-i18n="aboutTitle">به Note.Arsin خوش آمدی</h2>
+
+        <p data-i18n="aboutDescription">
+          Note.Arsin فضایی برای جمع‌آوری و ارائه مطالب آموزشی موسیقی است.
+          هدف ما ایجاد تجربه‌ای ساده، قابل دسترس و لذت‌بخش برای یادگیری است.
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <span class="logo-icon">♪</span>
+          <span class="logo-text">Note<span>.Arsin</span></span>
+        </a>
+
+        <p data-i18n="footerText">یادگیری موسیقی، با تجربه‌ای متفاوت.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#home" data-i18n="navHome">خانه</a>
+        <a href="#notes" data-i18n="navNotes">جزوه‌ها</a>
+        <a href="#instruments" data-i18n="navInstruments">سازها</a>
+        <a href="#about" data-i18n="navAbout">درباره ما</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Note.Arsin — <span data-i18n="copyright">تمام حقوق محفوظ است.</span></p>
+    </div>
+  </footer>
+
+</body>
+</html>
