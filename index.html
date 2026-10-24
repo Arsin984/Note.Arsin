@@ -1,292 +1,323 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Note.Arsin | خانه</title>
-
-  <meta name="description" content="Note.Arsin؛ دنیایی برای موسیقی، یادگیری، یادداشت‌ها و خلاقیت.">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/style.css">
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/main.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Music.Arsin</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg1:#fff3e8;--bg2:#ffd2b0;--ink:#2a1a12;--mut:#7a5e4f;--glass:rgba(255,255,255,.58);--bd:rgba(255,255,255,.8);--sh:0 10px 30px rgba(180,90,30,.2);--or1:#ffa65c;--or2:#ff6a3d;--mint:#19c9a8;--card:rgba(255,255,255,.7)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#1a110d;--bg2:#2b1810;--ink:#fff1e6;--mut:#c9a995;--glass:rgba(60,38,28,.55);--bd:rgba(255,200,160,.18);--sh:0 10px 30px rgba(0,0,0,.45);--card:rgba(70,44,32,.6)}}
+:root[data-theme="dark"]{--bg1:#1a110d;--bg2:#2b1810;--ink:#fff1e6;--mut:#c9a995;--glass:rgba(60,38,28,.55);--bd:rgba(255,200,160,.18);--sh:0 10px 30px rgba(0,0,0,.45);--card:rgba(70,44,32,.6)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:"Vazirmatn",system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(circle at 15% 10%,var(--or1) -20%,transparent 40%),radial-gradient(circle at 90% 70%,var(--mint) -30%,transparent 35%),linear-gradient(160deg,var(--bg1),var(--bg2));background-attachment:fixed;transition:color .4s;overflow-x:hidden}
+html[lang="en"] body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.glass{background:var(--glass);border:1px solid var(--bd);box-shadow:var(--sh);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4)}
+/* header */
+#top{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 12px);inset-inline:12px;max-width:980px;margin-inline:auto;display:flex;align-items:center;gap:12px;padding:8px 10px 8px 16px;border-radius:999px;transform-origin:top right;transition:transform .55s cubic-bezier(.7,0,.2,1),opacity .4s}
+html[dir="rtl"] #top{transform-origin:top left;padding:8px 16px 8px 10px}
+#top.gone{transform:translateY(-10px) scale(.06);opacity:0;pointer-events:none}
+.logo{font-weight:800;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.logo b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--or1),var(--or2));color:#fff;font-size:16px;animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(255,106,61,.18)}}
+nav{display:flex;gap:2px;margin-inline:auto}
+nav a{padding:7px 10px;border-radius:999px;font-size:14px;position:relative;transition:background .25s,transform .25s}
+nav a:hover{background:rgba(255,138,61,.16);transform:translateY(-1px)}
+nav a.on{background:linear-gradient(135deg,var(--or1),var(--or2));color:#fff}
+.ctl{display:flex;align-items:center;gap:8px}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;direction:ltr;width:76px;height:34px;border-radius:999px;background:rgba(127,127,127,.15);overflow:hidden}
+.seg i{position:relative;z-index:1;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:600;transition:color .35s}
+.seg .th{position:absolute;inset:3px auto 3px 3px;width:calc(50% - 3px);border-radius:999px;background:linear-gradient(135deg,var(--or1),var(--or2));transition:transform .45s cubic-bezier(.5,1.6,.4,1)}
+html[lang="en"] .seg .th{transform:translateX(100%)}
+.seg i:first-of-type{color:#fff}html[lang="en"] .seg i:first-of-type{color:inherit}
+html[lang="en"] .seg i:last-of-type{color:#fff}
+.seg:active .th{width:calc(50% + 4px)}
+.tg{position:relative;width:34px;height:34px;border-radius:50%;background:rgba(127,127,127,.15);overflow:hidden;transition:transform .3s}
+.tg:hover{transform:rotate(18deg)}
+.tg svg{position:absolute;inset:7px;width:20px;height:20px;transition:transform .6s cubic-bezier(.5,1.5,.4,1),opacity .35s}
+.tg .moon{color:var(--mint);transform:rotate(-90deg) scale(0);opacity:0}
+.tg .sun{color:var(--or2)}
+:root[data-theme="dark"] .tg .sun{transform:rotate(90deg) scale(0);opacity:0}
+:root[data-theme="dark"] .tg .moon{transform:none;opacity:1}
+/* corner button */
+#fab{position:fixed;z-index:60;top:calc(env(safe-area-inset-top,0px) + 12px);inset-inline-end:12px;transform:scale(0);transition:transform .5s cubic-bezier(.5,1.7,.4,1)}
+#fab.show{transform:scale(1)}
+#fabBtn{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:20px;color:#fff;background:linear-gradient(135deg,var(--or1),var(--or2));box-shadow:var(--sh);transition:transform .4s}
+#fab.open #fabBtn{transform:rotate(135deg)}
+#pop{position:absolute;top:58px;inset-inline-end:0;width:min(260px,calc(100vw - 24px));padding:12px;border-radius:24px;display:flex;flex-direction:column;gap:10px;transform-origin:top right;transform:scale(.4);opacity:0;pointer-events:none;transition:transform .4s cubic-bezier(.5,1.5,.4,1),opacity .25s}
+html[dir="rtl"] #pop{transform-origin:top left}
+#fab.open #pop{transform:none;opacity:1;pointer-events:auto}
+#pop nav{flex-direction:column;margin:0}
+#pop nav a{padding:10px 14px}
+#pop .ctl{justify-content:space-between;padding-top:8px;border-top:1px solid var(--bd)}
+/* theme reveal */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-new(root){animation:reveal .65s ease-out}
+@keyframes reveal{from{clip-path:circle(0 at var(--x,50%) var(--y,0))}to{clip-path:circle(150% at var(--x,50%) var(--y,0))}}
+/* language fade */
+main{transition:opacity .18s,transform .18s,filter .18s}
+body.sw main{opacity:0;transform:translateY(8px);filter:blur(4px)}
+/* layout */
+main{max-width:980px;margin:0 auto;padding:96px 16px 40px}
+.view{display:none}.view.on{display:block;animation:enter .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes enter{from{opacity:0;transform:translateY(22px) scale(.985)}}
+.hero{text-align:center;padding:48px 8px 36px}
+.hero h1{font-size:clamp(34px,7vw,64px);font-weight:800;margin:0 0 12px;line-height:1.2;background:linear-gradient(120deg,var(--or2),var(--or1) 50%,var(--mint));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);max-width:520px;margin:0 auto 26px;line-height:1.9}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:999px;font-weight:600;color:#fff;background:linear-gradient(135deg,var(--ac,var(--or1)),var(--or2));box-shadow:0 8px 20px rgba(255,106,61,.35);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);transition:transform .7s}
+.btn:hover{transform:translateY(-2px) scale(1.03)}.btn:hover::after{transform:translateX(120%)}
+.btn:active{transform:scale(.96)}
+.btn.ghost{background:var(--glass);color:var(--ink);box-shadow:var(--sh);border:1px solid var(--bd)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.card{border-radius:28px;padding:20px;background:var(--card);border:1px solid var(--bd);box-shadow:var(--sh);display:flex;flex-direction:column;gap:10px;transition:transform .35s,box-shadow .35s}
+.card:hover{transform:translateY(-6px) rotate(-.5deg)}
+.ico{height:92px;display:grid;place-items:center;border-radius:20px;color:var(--ac);background:color-mix(in srgb,var(--ac) 14%,transparent)}
+.ico svg{width:80px;height:60px;transition:transform .5s cubic-bezier(.5,1.6,.4,1)}
+.card:hover .ico svg{transform:scale(1.15) rotate(-6deg)}
+.card h3{margin:0}.card p{margin:0;color:var(--mut);font-size:14px;line-height:1.8;flex:1}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .6s,transform .6s}.rv.in{opacity:1;transform:none}
+h2{margin:36px 0 14px;font-size:22px}
+.back{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;margin-bottom:14px;font-size:14px}
+html[dir="rtl"] .back i{display:inline-block;transform:scaleX(-1)}
+.ph{border-radius:36px;padding:32px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 30%,transparent),var(--card));border:1px solid var(--bd);box-shadow:var(--sh);color:var(--ac)}
+.ph svg{width:150px;height:100px;flex:none;animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px) rotate(-3deg)}}
+.ph div{flex:1;min-width:200px;color:var(--ink)}
+.ph h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px)}.ph p{margin:0;color:var(--mut);line-height:1.9}
+.chip{display:inline-block;padding:3px 12px;border-radius:999px;font-size:12px;background:color-mix(in srgb,var(--ac) 18%,transparent);color:var(--ac);font-weight:600}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.price{font-weight:800}
+.note{margin-top:18px;padding:14px 18px;border-radius:20px;color:var(--mut);font-size:14px}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 0 10px}
+.view{min-height:90vh}
+body::before,body::after{content:"";position:fixed;z-index:-1;width:38vmax;height:38vmax;border-radius:50%;filter:blur(70px);opacity:.35;animation:blob 18s ease-in-out infinite alternate}
+body::before{background:var(--or1);top:-10vmax;left:-10vmax}body::after{background:var(--mint);bottom:-12vmax;right:-8vmax;animation-delay:-9s}
+@keyframes blob{to{transform:translate(8vmax,6vmax) scale(1.2)}}
+#fl{position:fixed;inset:0;z-index:40;pointer-events:none}
+#fl span{position:absolute;pointer-events:auto;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18));animation:bob 5s ease-in-out infinite}
+#fl span.drag{cursor:grabbing;animation:none;transform:scale(1.25)}
+@keyframes bob{50%{transform:translateY(-14px) rotate(8deg)}}
+#fl span.wig{animation:wig .7s}
+@keyframes wig{20%{transform:rotate(-25deg) scale(1.3)}40%{transform:rotate(22deg) scale(1.3)}60%{transform:rotate(-14deg)}80%{transform:rotate(8deg)}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:34px}.stats .card{align-items:center;text-align:center;padding:18px}.stats b{font-size:30px;background:linear-gradient(120deg,var(--or2),var(--mint));-webkit-background-clip:text;background-clip:text;color:transparent}.stats span{color:var(--mut);font-size:13px}
+.steps,.road{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;background:linear-gradient(135deg,var(--ac,var(--or1)),var(--or2))}
+.faq{display:flex;flex-direction:column;gap:10px}
+details{border-radius:20px;background:var(--card);border:1px solid var(--bd);box-shadow:var(--sh);padding:4px 18px}
+summary{cursor:pointer;padding:14px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:22px;color:var(--or2);transition:transform .35s}
+details[open] summary::after{transform:rotate(135deg)}
+details p{margin:0 0 14px;color:var(--mut);line-height:1.9;animation:enter .4s}
+.pager{display:flex;justify-content:center;gap:8px;margin-top:20px}
+.pgb{width:40px;height:40px;border-radius:50%;background:var(--glass);border:1px solid var(--bd);font-weight:600;transition:transform .3s}.pgb:hover{transform:scale(1.12)}.pgb.on{color:#fff;background:linear-gradient(135deg,var(--ac,var(--or1)),var(--or2))}
+.hid{display:none}.pg:not(.hid){animation:enter .5s}
+.vid{margin-top:34px;display:flex;align-items:center;gap:18px;padding:22px;border-radius:28px;background:var(--card);border:1px solid var(--bd);box-shadow:var(--sh)}.vid h3,.vid p{margin:0}.vid p{color:var(--mut);font-size:14px;margin-top:4px}
+.play{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:22px;flex:none;background:linear-gradient(135deg,var(--ac,var(--or1)),var(--or2));animation:pulse 2.5s infinite}
+.cta{margin:44px 0 10px;padding:40px 20px;text-align:center;border-radius:36px}.cta h2{margin-top:0}
+.big{font-size:34px}
+.auth{position:relative;overflow:hidden;display:flex;align-items:center;gap:8px;height:34px;padding:0 14px 0 5px;border-radius:999px;font-weight:600;font-size:13px;color:#fff;white-space:nowrap;background:linear-gradient(135deg,var(--or1),var(--or2));animation:glow 3s ease-in-out infinite;transition:transform .3s}
+.auth:hover{transform:translateY(-2px) scale(1.04)}.auth:active{transform:scale(.95)}
+.auth::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);animation:sweep 3.2s infinite}
+@keyframes glow{50%{box-shadow:0 0 0 6px rgba(255,106,61,.22)}}
+@keyframes sweep{0%,55%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+.auth .av{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.3);font-size:13px}
+.auth.me{background:linear-gradient(135deg,var(--mint),#10a98c);animation:none}.auth.me::after{display:none}
+#pop .ctl{flex-wrap:wrap}#pop .auth{flex:1 0 100%;justify-content:center;height:42px}
+@media (max-width:480px){#top .auth .at{display:none}#top .auth{padding:0 5px}}
+#am{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:16px;background:rgba(20,10,5,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s}
+#am.open{opacity:1;pointer-events:auto}
+#ab{position:relative;width:min(400px,100%);padding:30px 22px 22px;border-radius:32px;background:var(--bg1);border:1px solid var(--bd);box-shadow:0 30px 80px rgba(0,0,0,.4);text-align:center;overflow:hidden;transform:translateY(30px) scale(.9);transition:transform .5s cubic-bezier(.5,1.5,.4,1)}
+#ab::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:linear-gradient(90deg,var(--or1),var(--or2),var(--mint))}
+#am.open #ab{transform:none}
+#ab.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+#ab h3{margin:6px 0 4px;font-size:21px}#ab p{margin:0 0 16px;color:var(--mut);font-size:14px;line-height:1.8}
+#ab .x{position:absolute;top:14px;inset-inline-end:14px;width:32px;height:32px;border-radius:50%;background:rgba(127,127,127,.15);font-size:20px;line-height:1;transition:transform .3s}#ab .x:hover{transform:rotate(90deg)}
+.step{animation:enter .45s}
+.tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;direction:ltr;border-radius:999px;background:rgba(127,127,127,.15);margin:8px 0 16px;overflow:hidden}
+.tabs button{position:relative;z-index:1;padding:9px;font-weight:600;font-size:14px;transition:color .3s}.tabs button.on{color:#fff}
+.tabs i{position:absolute;inset:3px auto 3px 3px;width:calc(50% - 3px);border-radius:999px;background:linear-gradient(135deg,var(--or1),var(--or2));transition:transform .45s cubic-bezier(.5,1.5,.4,1)}.tabs.lg i{transform:translateX(100%)}
+.fld{width:100%;padding:13px 16px;margin-bottom:10px;border-radius:16px;border:1.5px solid var(--bd);background:var(--card);color:var(--ink);font:inherit;text-align:center;outline:0;transition:border-color .3s,box-shadow .3s;animation:enter .35s}
+.fld:focus{border-color:var(--or2);box-shadow:0 0 0 4px rgba(255,106,61,.18)}
+.er{min-height:22px;color:#e5484d;font-size:13px;margin-bottom:6px}
+.otp{display:flex;justify-content:center;gap:9px;margin:12px 0 4px}
+.otp input{width:48px;height:58px;border-radius:16px;border:1.5px solid var(--bd);background:var(--card);color:var(--ink);font-size:24px;font-weight:800;font-family:inherit;text-align:center;outline:0;padding:0;animation:pop .45s backwards;transition:border-color .3s,box-shadow .3s,transform .3s}
+.otp input:focus{border-color:var(--or2);box-shadow:0 0 0 4px rgba(255,106,61,.18);transform:translateY(-3px)}.otp input.f{border-color:var(--mint)}
+@keyframes pop{from{opacity:0;transform:scale(.4) translateY(14px)}}
+.demo{display:inline-flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 14px;border-radius:18px;font-size:12px;background:rgba(25,201,168,.15);color:var(--mint)}.demo b{font-size:19px;letter-spacing:4px;color:var(--ink)}
+.btn.w{width:100%;justify-content:center;font-size:15px;font-family:inherit}
+.sub{display:flex;justify-content:space-between;margin-top:14px;font-size:13px;color:var(--mut)}.sub button{color:var(--or2);font-weight:600}.sub button:disabled{color:var(--mut);opacity:.7;cursor:default}
+.ok{display:block;width:84px;height:84px;margin:8px auto 14px}.ok circle{fill:none;stroke:var(--mint);stroke-width:4;stroke-dasharray:240;stroke-dashoffset:240;animation:dr .7s forwards}.ok path{fill:none;stroke:var(--mint);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:50;stroke-dashoffset:50;animation:dr .5s .55s forwards}@keyframes dr{to{stroke-dashoffset:0}}
+.num.big2{width:72px;height:72px;font-size:30px;margin:6px auto 10px}
+@media (max-width:760px){#top nav{display:none}#top{justify-content:space-between}.ctl{margin-inline-start:auto}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}}
+</style>
 </head>
-
 <body>
-
-  <!-- Header -->
-  <header class="header">
-    <nav class="navbar">
-
-      <a href="index.html" class="logo">
-        <span class="logo-icon">N</span>
-        <span>Note.Arsin</span>
-      </a>
-
-      <div class="nav-links" id="navLinks">
-        <a href="#home" data-i18n="home">خانه</a>
-        <a href="#notes" data-i18n="notes">یادداشت‌ها</a>
-        <a href="#music" data-i18n="music">موسیقی</a>
-        <a href="#instruments" data-i18n="instruments">سازها</a>
-        <a href="#tutorials" data-i18n="tutorials">آموزش‌ها</a>
-        <a href="#about" data-i18n="about">درباره ما</a>
-      </div>
-
-      <div class="nav-actions">
-        <button id="languageBtn" class="icon-btn" type="button" aria-label="تغییر زبان">
-          EN
-        </button>
-
-        <button id="themeBtn" class="icon-btn" type="button" aria-label="تغییر تم">
-          ☀️
-        </button>
-
-        <button id="menuBtn" class="menu-btn" type="button"
-          aria-label="باز کردن منو" aria-expanded="false">
-          ☰
-        </button>
-      </div>
-
-    </nav>
-  </header>
-
-  <main>
-
-    <!-- Hero -->
-    <section class="hero" id="home">
-      <div class="hero-content">
-
-        <span class="hero-tag" data-i18n="heroTag">
-          به دنیای خلاقیت خوش آمدید
-        </span>
-
-        <h1 data-i18n="heroTitle">
-          هر ایده‌ای، یک شروع تازه است.
-        </h1>
-
-        <p data-i18n="heroText">
-          در Note.Arsin موسیقی گوش کن، یاد بگیر، یادداشت بردار و ایده‌هایت را کشف کن.
-        </p>
-
-        <div class="hero-buttons">
-          <a href="#music" class="primary-btn" data-i18n="exploreMusic">
-            کشف موسیقی
-          </a>
-
-          <a href="#about" class="secondary-btn" data-i18n="learnMore">
-            بیشتر بدانید
-          </a>
-        </div>
-
-      </div>
-
-      <div class="hero-decoration">
-        <div class="hero-circle">
-          <span>♪</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Welcome -->
-    <section class="welcome-section">
-      <div class="welcome-card">
-        <span class="welcome-icon">✦</span>
-
-        <div>
-          <h2 data-i18n="welcomeTitle">Welcome to Note.Arsin</h2>
-          <p data-i18n="welcomeText">
-            فضایی برای یادگیری، موسیقی و ایده‌های تازه.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Main Cards -->
-    <section class="section" id="notes">
-
-      <div class="section-heading">
-        <span class="section-label" data-i18n="discover">کشف کنید</span>
-        <h2 data-i18n="sectionsTitle">بخش‌های سایت</h2>
-        <p data-i18n="sectionsText">
-          بخش مورد علاقه خود را انتخاب کنید.
-        </p>
-      </div>
-
-      <div class="cards-grid">
-
-        <a href="#music" class="feature-card">
-          <div class="card-icon music-icon">♫</div>
-          <h3 data-i18n="musicCard">موسیقی</h3>
-          <p data-i18n="musicDesc">
-            آهنگ‌ها و آثار موسیقی را کشف کنید.
-          </p>
-          <span class="card-arrow">←</span>
-        </a>
-
-        <a href="#instruments" class="feature-card">
-          <div class="card-icon instrument-icon">🎹</div>
-          <h3 data-i18n="instrumentCard">سازها</h3>
-          <p data-i18n="instrumentDesc">
-            با دنیای سازهای موسیقی آشنا شوید.
-          </p>
-          <span class="card-arrow">←</span>
-        </a>
-
-        <a href="#tutorials" class="feature-card">
-          <div class="card-icon tutorial-icon">▶</div>
-          <h3 data-i18n="tutorialCard">آموزش‌ها</h3>
-          <p data-i18n="tutorialDesc">
-            مطالب آموزشی و ویدئوهای یادگیری.
-          </p>
-          <span class="card-arrow">←</span>
-        </a>
-
-        <a href="#notes" class="feature-card">
-          <div class="card-icon notes-icon">✎</div>
-          <h3 data-i18n="notesCard">یادداشت‌ها</h3>
-          <p data-i18n="notesDesc">
-            ایده‌ها و نوشته‌های خود را دنبال کنید.
-          </p>
-          <span class="card-arrow">←</span>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- Music -->
-    <section class="section music-section" id="music">
-
-      <div class="section-heading">
-        <span class="section-label" data-i18n="musicLabel">موسیقی</span>
-        <h2 data-i18n="musicTitle">موسیقی‌های منتخب</h2>
-        <p data-i18n="musicSectionText">
-          آهنگ مورد علاقه‌ات را جست‌وجو کن.
-        </p>
-      </div>
-
-      <div class="music-toolbar">
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="جست‌وجوی آهنگ یا خواننده..."
-          data-i18n-placeholder="searchPlaceholder"
-          aria-label="جست‌وجوی آهنگ"
-        >
-      </div>
-
-      <div class="song-info">
-        <span data-i18n="songCountLabel">تعداد آهنگ‌ها:</span>
-        <strong id="songCount">0</strong>
-      </div>
-
-      <div class="songs-grid" id="songGrid">
-        <div class="loading-message">
-          در حال بارگذاری آهنگ‌ها...
-        </div>
-      </div>
-
-    </section>
-
-    <!-- Instruments -->
-    <section class="section" id="instruments">
-
-      <div class="section-heading">
-        <span class="section-label" data-i18n="instrumentsLabel">سازهای موسیقی</span>
-        <h2 data-i18n="instrumentsTitle">دنیای سازها</h2>
-        <p data-i18n="instrumentsText">
-          با سازهای مختلف و صدای منحصربه‌فرد آن‌ها آشنا شوید.
-        </p>
-      </div>
-
-      <div class="cards-grid">
-
-        <div class="feature-card instrument-card">
-          <div class="card-icon">🎹</div>
-          <h3 data-i18n="piano">پیانو</h3>
-          <p data-i18n="pianoDesc">ساز کلاویه‌ای با صدایی گسترده.</p>
-        </div>
-
-        <div class="feature-card instrument-card">
-          <div class="card-icon">🎸</div>
-          <h3 data-i18n="guitar">گیتار</h3>
-          <p data-i18n="guitarDesc">ساز زهی محبوب در سبک‌های مختلف.</p>
-        </div>
-
-        <div class="feature-card instrument-card">
-          <div class="card-icon">🎻</div>
-          <h3 data-i18n="violin">ویولن</h3>
-          <p data-i18n="violinDesc">ساز زهی با صدایی لطیف و پرقدرت.</p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Tutorials -->
-    <section class="section tutorials-section" id="tutorials">
-
-      <div class="section-heading">
-        <span class="section-label" data-i18n="learning">یادگیری</span>
-        <h2 data-i18n="tutorialsTitle">آموزش و یادگیری</h2>
-        <p data-i18n="tutorialsText">
-          مسیر یادگیری خود را با مطالب آموزشی آغاز کنید.
-        </p>
-      </div>
-
-      <div class="tutorial-box">
-        <div class="tutorial-symbol">▶</div>
-        <h3 data-i18n="comingSoon">به‌زودی</h3>
-        <p data-i18n="comingSoonText">
-          آموزش‌ها و محتوای جدید در این بخش قرار می‌گیرند.
-        </p>
-      </div>
-
-    </section>
-
-    <!-- About -->
-    <section class="section about-section" id="about">
-
-      <div class="about-content">
-        <span class="section-label" data-i18n="aboutLabel">درباره ما</span>
-
-        <h2 data-i18n="aboutTitle">درباره Note.Arsin</h2>
-
-        <p data-i18n="aboutText">
-          Note.Arsin پروژه‌ای برای ترکیب موسیقی، یادگیری، خلاقیت و اشتراک ایده‌هاست.
-          هدف ما ساخت فضایی ساده و کاربردی برای علاقه‌مندان است.
-        </p>
-
-      </div>
-
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-
-      <a href="#home" class="logo footer-logo">
-        <span class="logo-icon">N</span>
-        <span>Note.Arsin</span>
-      </a>
-
-      <p data-i18n="footerText">
-        ساخته‌شده با علاقه برای ایده‌های تازه.
-      </p>
-
-      <div class="footer-bottom">
-        © 2026 Note.Arsin — All rights reserved.
-      </div>
-
-    </div>
-  </footer>
-
+<header id="top" class="glass">
+  <a class="logo" href="#"><b>♪</b>Music.Arsin</a>
+  <nav>
+    <a href="#" data-r="" data-i="home"></a><a href="#piano" data-r="piano" data-i="piano"></a><a href="#guitar" data-r="guitar" data-i="guitar"></a><a href="#drums" data-r="drums" data-i="drums"></a><a href="#violin" data-r="violin" data-i="violin"></a><a href="#lessons" data-r="lessons" data-i="lessons"></a><a href="#about" data-r="about" data-i="about"></a>
+  </nav>
+  <div class="ctl">
+    <button class="auth js-auth" aria-label="Account"><span class="av">👤</span><span class="at"></span></button>
+    <button class="seg js-lang" aria-label="Language / زبان"><span class="th"></span><i>FA</i><i>EN</i></button>
+    <button class="tg js-theme" aria-label="Theme">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<div id="fab"><button id="fabBtn" aria-label="Menu">♪</button><div id="pop" class="glass"></div></div>
+<div id="am" role="dialog" aria-modal="true"><div id="ab"></div></div>
+<main>
+  <section class="view" id="v-home">
+    <div class="hero"><h1 data-i="h1"></h1><p data-i="h2"></p><a class="btn" href="#piano" data-i="cta"></a></div>
+    <div class="grid" id="grid"></div>
+  </section>
+  <div id="pages"></div>
+  <footer data-i="foot"></footer>
+</main>
+<script>
+var T={fa:{home:"خانه",piano:"پیانو",guitar:"گیتار",drums:"درام",violin:"ویولن",h1:"نت‌های ناب، یادگیری لذت‌بخش",h2:"نت و آموزش ویدیویی پیانو، گیتار، درام و ویولن؛ با پیش‌نمایش رایگان و دسترسی کامل پس از خرید.",cta:"شروع کن",ex:"کاوش",back:"بازگشت",sc:"نت‌های نمونه",pv:"پیش‌نمایش",lock:"نت کامل و ویدیوی آموزشی پس از خرید باز می‌شود.",toman:"تومان",foot:"© Music.Arsin"},
+en:{home:"Home",piano:"Piano",guitar:"Guitar",drums:"Drums",violin:"Violin",h1:"Beautiful scores, joyful learning",h2:"Sheet music and video lessons for piano, guitar, drums and violin. Free preview, full access after purchase.",cta:"Get started",ex:"Explore",back:"Back",sc:"Sample scores",pv:"Preview",lock:"The full score and tutorial video unlock after purchase.",toman:"Toman",foot:"© Music.Arsin"}};
+var LV={fa:["مبتدی","متوسط","پیشرفته"],en:["Beginner","Intermediate","Advanced"]};
+var S=function(a){return '<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">'+a+'</svg>'};
+var D={
+piano:{c:"#ff8a3d",n:["پیانو","Piano"],t:["از ملودی‌های ساده تا قطعات کلاسیک؛ دست‌هایتان را روی کلیدها آزاد کنید.","From simple melodies to classical pieces. Let your hands roam the keys."],
+ i:S([0,1,2,3,4,5,6].map(function(i){return '<rect x="'+(6+i*15)+'" y="8" width="15" height="64" rx="3"/>'}).join('')+[0,1,3,4,5].map(function(i){return '<rect x="'+(16+i*15)+'" y="8" width="9" height="38" rx="2" fill="currentColor"/>'}).join('')),
+ s:[["اتود مهتاب","Moonlit Etude",0,149000],["والس بارانی","Rainy Waltz",1,199000],["سوناتای طلایی","Golden Sonata",2,299000]]},
+guitar:{c:"#ff5d73",n:["گیتار","Guitar"],t:["آکوردها، فینگراستایل و سولو؛ از اولین ضرب تا اجرای زنده.","Chords, fingerstyle and solos, from your first strum to the stage."],
+ i:S('<g transform="rotate(-35 60 40)"><ellipse cx="38" cy="40" rx="20" ry="16"/><ellipse cx="62" cy="40" rx="14" ry="12"/><circle cx="50" cy="40" r="5"/><rect x="74" y="36" width="38" height="8" rx="2"/><rect x="108" y="33" width="10" height="14" rx="2"/></g>'),
+ s:[["غروب ساحل","Beach Sunset",0,129000],["جاده شمال","Northern Road",1,179000],["شب فلامنکو","Flamenco Night",2,249000]]},
+drums:{c:"#19c9a8",n:["درام","Drums"],t:["ریتم، گروو و فیل‌های انرژی‌بخش؛ از پایه تا سبک‌های حرفه‌ای.","Rhythm, groove and energetic fills, from the basics to pro styles."],
+ i:S('<ellipse cx="60" cy="34" rx="26" ry="8"/><path d="M34 34v22c0 5 12 9 26 9s26-4 26-9V34"/><ellipse cx="20" cy="20" rx="14" ry="4"/><ellipse cx="100" cy="20" rx="14" ry="4"/><path d="M20 24v36M100 24v36M12 6l24 20M108 6L84 26"/>'),
+ s:[["ضرب اول","First Beat",0,99000],["گرووی خیابانی","Street Groove",1,149000],["رعد و برق","Thunder Fill",2,219000]]},
+violin:{c:"#9b7bff",n:["ویولن","Violin"],t:["صدای گرم و احساسی؛ آرشه، ریتم و بیان را قدم به قدم بیاموزید.","A warm, expressive voice. Learn bow, rhythm and feeling step by step."],
+ i:S('<g transform="rotate(-30 60 40)"><ellipse cx="40" cy="40" rx="17" ry="14"/><ellipse cx="66" cy="40" rx="12" ry="10"/><rect x="76" y="37" width="34" height="6" rx="2"/><circle cx="115" cy="40" r="4"/></g>'),
+ s:[["لالایی شبانه","Night Lullaby",0,139000],["رقص پاییزی","Autumn Dance",1,189000],["کاپریس نقره‌ای","Silver Caprice",2,279000]]}};
+var K=Object.keys(D),H=document.documentElement,L="fa";
+function esc(s){return s}
+function render(){
+  var i=L=="fa"?0:1,nf=new Intl.NumberFormat(L=="fa"?"fa-IR":"en-US"),t=T[L];
+  document.getElementById("grid").innerHTML=K.map(function(k){var d=D[k];return '<article class="card rv" style="--ac:'+d.c+'"><div class="ico">'+d.i+'</div><h3>'+d.n[i]+'</h3><p>'+d.t[i]+'</p><a class="btn" href="#'+k+'">'+t.ex+'</a></article>'}).join('');
+  document.getElementById("pages").innerHTML=K.map(function(k){var d=D[k];
+    return '<section class="view" id="v-'+k+'" style="--ac:'+d.c+'"><a class="back glass" href="#"><i>←</i>'+t.back+'</a><div class="ph">'+d.i+'<div><h1>'+d.n[i]+'</h1><p>'+d.t[i]+'</p></div></div><h2>'+t.sc+'</h2><div class="grid">'+
+    d.s.map(function(s){return '<article class="card rv"><span class="chip">'+LV[L][s[2]]+'</span><h3>'+s[i]+'</h3><div class="row"><span class="price">'+nf.format(s[3])+' '+t.toman+'</span><button class="btn ghost">'+t.pv+'</button></div></article>'}).join('')+
+    '</div><div class="note glass">🔒 '+t.lock+'</div></section>'}).join('');
+  document.querySelectorAll("[data-i]").forEach(function(e){e.textContent=t[e.dataset.i]});
+  extra();route();observe();
+}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
+function observe(){document.querySelectorAll(".rv:not(.in)").forEach(function(e,n){e.style.transitionDelay=(n%4)*80+"ms";io.observe(e)})}
+function route(){
+  var h=location.hash.slice(1);if(K.indexOf(h)<0&&P.indexOf(h)<0)h="";
+  document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("on",v.id=="v-"+(h||"home"))});
+  document.querySelectorAll("nav a").forEach(function(a){a.classList.toggle("on",a.dataset.r===h)});
+  closePop();observe();
+}
+addEventListener("hashchange",function(){route();scrollTo({top:0,behavior:"smooth"})});
+function setLang(l){
+  document.body.classList.add("sw");
+  setTimeout(function(){L=l;H.lang=l;H.dir=l=="fa"?"rtl":"ltr";render();try{localStorage.setItem("lang",l)}catch(e){}document.body.classList.remove("sw")},190);
+}
+function setTheme(t,x,y){
+  var go=function(){H.dataset.theme=t;try{localStorage.setItem("theme",t)}catch(e){}};
+  if(!document.startViewTransition||matchMedia("(prefers-reduced-motion:reduce)").matches)return go();
+  H.style.setProperty("--x",x+"px");H.style.setProperty("--y",y+"px");document.startViewTransition(go);
+}
+var P=["lessons","about"];
+T.fa.lessons="آموزش";T.fa.about="درباره ما";T.en.lessons="Lessons";T.en.about="About";
+var U={fa:{st:[["+۱۲۰","نت آماده"],["۴","ساز"],["+۸۰","ویدیوی آموزشی"],["۲۴/۷","دسترسی دائمی"]],how:"چطور کار می‌کند؟",steps:[["ورود با پیامک","فقط با شماره موبایل وارد شو؛ بدون رمز و فرم طولانی."],["پیش‌نمایش رایگان","چند میزان اول و نمونهٔ صدا را قبل از خرید ببین."],["بخر و یاد بگیر","پرداخت امن؛ نت کامل و ویدیوی آموزشی فوراً باز می‌شود."]],faq:"سؤال‌های پرتکرار",q:[["نت‌ها بعد از خرید چطور به دستم می‌رسد؟","بلافاصله بعد از پرداخت در حساب کاربری‌ات باز می‌شود و همیشه در دسترس است."],["پرداخت امن است؟","پرداخت از طریق درگاه رسمی انجام می‌شود و اطلاعات کارتت دست ما نمی‌رسد."],["ویدیوهای آموزشی شامل چه چیزی هستند؟","هر نت یک ویدیوی قدم‌به‌قدم دارد که فقط خریداران آن را می‌بینند."],["اگر مبتدی باشم چه؟","هر نت برچسب سطح دارد؛ از «مبتدی» شروع کن و کم‌کم جلو برو."]],vid:"ویدیوی آموزشی",vidt:"با خرید هر نت، ویدیوی قدم‌به‌قدمش هم باز می‌شود.",cta:"آمادهٔ شروع هستی؟",lt:"مسیر یادگیری",ls:"از اولین نت تا اجرای کامل، در سه مرحله.",ld:["آشنایی با نت‌ها، ریتم و آهنگ‌های ساده.","تکنیک‌های دست، قطعات کوتاه و اجرای روان.","قطعات کامل، بیان احساس و اجرای حرفه‌ای."],pick:"ساز خودت را انتخاب کن",at:"دربارهٔ Music.Arsin",ap:"Music.Arsin با یک ایده شروع شد: یادگیری موسیقی باید ساده، زیبا و در دسترس باشد. نت‌ها و ویدیوها را با دقت انتخاب می‌کنیم تا از اولین ضرب تا اجرای کامل کنار تو باشند.",val:[["🎯","ساده","بدون پیچیدگی؛ مسیر یادگیری روشن."],["💎","باکیفیت","نت‌های دقیق و ویدیوهای واضح."],["🤝","همراه","مسیر پیشنهادی برای هر سطح."]]},
+en:{st:[["120+","Ready scores"],["4","Instruments"],["80+","Video lessons"],["24/7","Lifetime access"]],how:"How it works",steps:[["Sign in by SMS","Just your mobile number. No password, no long forms."],["Free preview","See the first bars and hear a sample before buying."],["Buy and learn","Secure payment; the full score and video unlock instantly."]],faq:"Frequently asked questions",q:[["How do I get the scores after buying?","They unlock in your account right after payment and stay there for good."],["Is payment secure?","Payment goes through the official gateway; we never see your card details."],["What do the video lessons include?","Every score has a step-by-step video that only buyers can watch."],["What if I am a beginner?","Each score has a level label. Start with Beginner and move up."]],vid:"Video lesson",vidt:"Buying a score also unlocks its step-by-step video.",cta:"Ready to start?",lt:"Learning path",ls:"From your first note to a full performance, in three stages.",ld:["Getting to know notes, rhythm and simple tunes.","Hand technique, short pieces and fluent playing.","Complete pieces, expression and pro-level performance."],pick:"Choose your instrument",at:"About Music.Arsin",ap:"Music.Arsin started with one idea: learning music should be simple, beautiful and accessible. We pick scores and videos with care so they stay with you from the first beat to the full performance.",val:[["🎯","Simple","No clutter, a clear path to learn."],["💎","High quality","Accurate scores and clear videos."],["🤝","Supportive","A suggested route for every level."]]}};
+var X={piano:[["رؤیای بهاری","Spring Dream",0,119000],["نوکتورن آبی","Blue Nocturne",1,229000],["فانتزی شب روشن","Bright Night Fantasy",2,319000]],guitar:[["نسیم صبحگاهی","Morning Breeze",0,109000],["بلوز کویر","Desert Blues",1,199000],["سولوی آتشین","Fiery Solo",2,269000]],drums:[["ضرب‌های ساده","Simple Pulse",0,89000],["راک شبانه","Night Rock",1,169000],["طوفان پایه","Kick Storm",2,239000]],violin:[["آواز پرنده","Bird Song",0,129000],["ملودی غروب","Dusk Melody",1,199000],["رقص شعله","Flame Dance",2,289000]]};
+function steps(u){return '<div class="steps">'+u.steps.map(function(s,n){return '<div class="card rv"><span class="num">'+(n+1)+'</span><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div>'}).join('')+'</div>'}
+function faq(u){return '<h2>'+u.faq+'</h2><div class="faq">'+u.q.map(function(q){return '<details class="rv"><summary>'+q[0]+'</summary><p>'+q[1]+'</p></details>'}).join('')+'</div>'}
+function wig(s){s.classList.remove("wig");void s.offsetWidth;s.classList.add("wig");setTimeout(function(){s.classList.remove("wig")},700)}
+function floaters(){if(document.getElementById("fl"))return;var f=document.createElement("div");f.id="fl";
+["🎵","🎹","🎸","🥁","🎻","🎶","🎼"].forEach(function(e,n){var s=document.createElement("span");s.textContent=e;s.style.cssText="left:"+(6+n*13)+"%;top:"+(20+(n*37)%58)+"%;font-size:"+(26+n%3*8)+"px;animation-delay:-"+n*.9+"s";f.appendChild(s)});
+document.body.appendChild(f);
+var cur,ox,oy,vx=0,vy=0,lx,ly,mv=0;
+f.addEventListener("pointerdown",function(e){var s=e.target.closest("span");if(!s)return;cur=s;mv=0;var r=s.getBoundingClientRect();ox=e.clientX-r.left;oy=e.clientY-r.top;lx=e.clientX;ly=e.clientY;vx=vy=0;s.setPointerCapture(e.pointerId);s.style.left=r.left+"px";s.style.top=r.top+"px";s.classList.add("drag")});
+f.addEventListener("pointermove",function(e){if(!cur)return;cur.style.left=(e.clientX-ox)+"px";cur.style.top=(e.clientY-oy)+"px";vx=e.clientX-lx;vy=e.clientY-ly;mv+=Math.abs(vx)+Math.abs(vy);lx=e.clientX;ly=e.clientY});
+f.addEventListener("pointerup",function(){var s=cur;if(!s)return;cur=null;s.classList.remove("drag");if(mv<6)return wig(s);
+var x=parseFloat(s.style.left),y=parseFloat(s.style.top);(function step(){vx*=.93;vy*=.93;x+=vx;y+=vy;var mx=innerWidth-44,my=innerHeight-44;if(x<0||x>mx){vx=-vx;x=Math.max(0,Math.min(mx,x))}if(y<0||y>my){vy=-vy;y=Math.max(0,Math.min(my,y))}s.style.left=x+"px";s.style.top=y+"px";if(Math.abs(vx)+Math.abs(vy)>.4)requestAnimationFrame(step);else wig(s)})()});
+addEventListener("devicemotion",function(e){var a=e.accelerationIncludingGravity;if(a&&Math.abs(a.x||0)+Math.abs(a.y||0)>32)f.querySelectorAll("span").forEach(wig)});
+}
+document.addEventListener("click",function(e){var b=e.target.closest(".pgb");if(!b)return;var s=b.closest(".view");s.querySelectorAll(".pg").forEach(function(g){g.classList.toggle("hid",g.dataset.p!=b.dataset.n)});s.querySelectorAll(".pgb").forEach(function(x){x.classList.toggle("on",x===b)});observe()});
+function extra(){
+var i=L=="fa"?0:1,u=U[L],t=T[L],nf=new Intl.NumberFormat(L=="fa"?"fa-IR":"en-US");
+function card(s){return '<article class="card rv"><span class="chip">'+LV[L][s[2]]+'</span><h3>'+s[i]+'</h3><div class="row"><span class="price">'+nf.format(s[3])+' '+t.toman+'</span><button class="btn ghost">'+t.pv+'</button></div></article>'}
+K.forEach(function(k){var s=document.getElementById("v-"+k),g=s.querySelector(".grid");g.classList.add("pg");g.dataset.p=1;
+g.insertAdjacentHTML("afterend",'<div class="grid pg hid" data-p="2">'+X[k].map(card).join('')+'</div><div class="pager"><button class="pgb on" data-n="1">'+nf.format(1)+'</button><button class="pgb" data-n="2">'+nf.format(2)+'</button></div>');
+s.insertAdjacentHTML("beforeend",'<div class="vid rv"><div class="play">▶</div><div><h3>'+u.vid+'</h3><p>'+u.vidt+'</p></div></div><h2>'+u.how+'</h2>'+steps(u)+faq(u))});
+var old=document.getElementById("hx");if(old)old.remove();
+document.getElementById("v-home").insertAdjacentHTML("beforeend",'<div id="hx"><div class="stats">'+u.st.map(function(s){return '<div class="card rv"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>'}).join('')+'</div><h2>'+u.how+'</h2>'+steps(u)+faq(u)+'<div class="cta glass rv"><h2>'+u.cta+'</h2><a class="btn" href="#piano">'+t.cta+'</a></div></div>');
+document.getElementById("pages").insertAdjacentHTML("beforeend",
+'<section class="view" id="v-lessons"><div class="ph" style="--ac:#19c9a8"><div><h1>'+u.lt+'</h1><p>'+u.ls+'</p></div></div><h2>'+LV[L][0]+' › '+LV[L][2]+'</h2><div class="road">'+LV[L].map(function(l,n){return '<div class="card rv"><span class="chip">'+nf.format(n+1)+'</span><h3>'+l+'</h3><p>'+u.ld[n]+'</p></div>'}).join('')+'</div><h2>'+u.pick+'</h2><div class="grid">'+K.map(function(k){return '<a class="card rv" style="--ac:'+D[k].c+'" href="#'+k+'"><div class="ico">'+D[k].i+'</div><h3>'+D[k].n[i]+'</h3></a>'}).join('')+'</div>'+steps(u)+faq(u)+'</section>'+
+'<section class="view" id="v-about"><div class="ph" style="--ac:#ff8a3d"><div><h1>'+u.at+'</h1><p>'+u.ap+'</p></div></div><div class="stats">'+u.st.map(function(s){return '<div class="card rv"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>'}).join('')+'</div><div class="steps" style="margin-top:24px">'+u.val.map(function(v){return '<div class="card rv"><span class="big">'+v[0]+'</span><h3>'+v[1]+'</h3><p>'+v[2]+'</p></div>'}).join('')+'</div>'+faq(u)+'</section>');
+floaters();updateAuth();if(document.getElementById("am").classList.contains("open"))authRender()}
+var AU={step:1,tab:"up",phone:"",name:"",code:"",t:0,tm:0,busy:0},MEM={},ME=null;
+var W={fa:{sign:"ورود / ثبت‌نام",up:"ثبت‌نام",lg:"ورود",nm:"نام شما",pl:"شمارهٔ موبایل (مثلاً ۰۹۱۲۳۴۵۶۷۸۹)",go:"دریافت کد",t1:"به Music.Arsin خوش آمدی",s1:"فقط با شمارهٔ موبایل؛ بدون رمز عبور.",t2:"کد ۵ رقمی را وارد کن",s2:"کد برای شمارهٔ {p} ارسال شد.",demo:"کد آزمایشی (در نسخهٔ واقعی با پیامک می‌آید)",ok:"تأیید و ورود",edit:"تغییر شماره",resend:"ارسال دوباره",wait:"ارسال دوباره تا {s} ثانیه",bad:"شمارهٔ موبایل معتبر نیست.",nn:"لطفاً نامت را وارد کن.",nf:"این شماره هنوز ثبت‌نام نکرده؛ اول ثبت‌نام کن.",dup:"این شماره قبلاً ثبت‌نام کرده؛ وارد شو.",short:"هر ۵ رقم را وارد کن.",wr:"کد اشتباه است؛ دوباره تلاش کن.",done:"خوش آمدی",out:"خروج از حساب"},en:{sign:"Sign in / Sign up",up:"Sign up",lg:"Sign in",nm:"Your name",pl:"Mobile number (e.g. 09123456789)",go:"Get code",t1:"Welcome to Music.Arsin",s1:"Just your mobile number. No password.",t2:"Enter the 5-digit code",s2:"A code was sent to {p}.",demo:"Demo code (the real site sends it by SMS)",ok:"Verify and sign in",edit:"Change number",resend:"Send again",wait:"Send again in {s}s",bad:"That mobile number is not valid.",nn:"Please enter your name.",nf:"This number is not registered yet. Sign up first.",dup:"This number is already registered. Sign in instead.",short:"Enter all 5 digits.",wr:"Wrong code. Try again.",done:"Welcome",out:"Sign out"}};
+function sget(k){try{var v=localStorage.getItem(k);if(v!==null)return v}catch(e){}return MEM[k]||null}
+function sset(k,v){MEM[k]=v;try{localStorage.setItem(k,v)}catch(e){}}
+function reg(){try{return JSON.parse(sget("arsin_users")||"{}")||{}}catch(e){return{}}}
+try{ME=JSON.parse(sget("arsin_me")||"null")}catch(e){ME=null}
+function ln(v){return String(v).replace(/[۰-۹]/g,function(d){return d.charCodeAt(0)-1776}).replace(/[٠-٩]/g,function(d){return d.charCodeAt(0)-1632})}
+function dg(s){return L=="fa"?String(s).replace(/\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹".charAt(d)}):String(s)}
+function he(s){return String(s).replace(/[&<>"']/g,function(c){return "&#"+c.charCodeAt(0)+";"})}
+function nrm(v){v=ln(v).replace(/\D/g,"");if(v.indexOf("98")==0&&v.length==12)v="0"+v.slice(2);if(v.length==10&&v.charAt(0)=="9")v="0"+v;return /^09\d{9}$/.test(v)?v:""}
+function $(s){return document.querySelector(s)}
+function otpVal(){return Array.prototype.map.call(document.querySelectorAll(".otp input"),function(i){return ln(i.value)}).join("")}
+function fail(m){var e=$("#er");if(e)e.textContent=m;var b=$("#ab");b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake")}
+function tick(first){var w=W[L],b=document.getElementById("rs");if(first){AU.t=60;clearInterval(AU.tm);AU.tm=setInterval(tick,1000)}else AU.t--;if(!b){clearInterval(AU.tm);return}if(AU.t>0){b.disabled=true;b.textContent=w.wait.replace("{s}",dg(AU.t))}else{b.disabled=false;b.textContent=w.resend;clearInterval(AU.tm)}}
+function authRender(){var w=W[L],h='<button class="x" data-a="close" aria-label="Close">×</button><div class="step">';clearInterval(AU.tm);
+if(AU.step==3&&ME)h+='<svg class="ok" viewBox="0 0 84 84"><circle cx="42" cy="42" r="37"/><path d="M26 43l12 12 21-24"/></svg><h3>'+w.done+'، '+he(ME.name)+'</h3>';
+else if(ME)h+='<div class="num big2">'+he(ME.name.charAt(0))+'</div><h3>'+he(ME.name)+'</h3><p>'+dg(ME.phone)+'</p><button class="btn w" data-a="out">'+w.out+'</button>';
+else if(AU.step==1)h+='<div class="tabs'+(AU.tab=="lg"?" lg":"")+'"><i></i><button data-a="tab" data-v="up" class="'+(AU.tab=="up"?"on":"")+'">'+w.up+'</button><button data-a="tab" data-v="lg" class="'+(AU.tab=="lg"?"on":"")+'">'+w.lg+'</button></div><h3>'+w.t1+'</h3><p>'+w.s1+'</p>'+(AU.tab=="up"?nmf(w):'')+'<input class="fld" id="ph" inputmode="tel" autocomplete="tel" placeholder="'+w.pl+'" value="'+he(AU.phone)+'"><div class="er" id="er"></div><button class="btn w" data-a="send">'+w.go+'</button>';
+else{h+='<h3>'+w.t2+'</h3><p>'+w.s2.replace("{p}",'<b dir="ltr">'+dg(AU.phone)+'</b>')+'</p><div class="demo">'+w.demo+' <b id="dc">'+dg(AU.code)+'</b></div><div class="otp" dir="ltr">';for(var n=0;n<5;n++)h+='<input inputmode="numeric" autocomplete="one-time-code" maxlength="2" style="animation-delay:'+n*70+'ms">';h+='</div><div class="er" id="er"></div><button class="btn w" data-a="ver">'+w.ok+'</button><div class="sub"><button data-a="edit">'+w.edit+'</button><button data-a="resend" id="rs" disabled></button></div>'}
+$("#ab").innerHTML=h+'</div>';
+if(AU.step==2&&!ME)tick(1);
+if(!ME&&AU.step<3)setTimeout(function(){var f=$(AU.step==2?".otp input":"#ph");if(f)f.focus()},350)}
+function nmf(w){return '<input class="fld" id="nm" maxlength="40" autocomplete="name" placeholder="'+w.nm+'" value="'+he(AU.name)+'">'}
+function authOpen(){AU.step=1;authRender();$("#am").classList.add("open")}
+function authClose(){$("#am").classList.remove("open");clearInterval(AU.tm);setTimeout(function(){AU.step=1;AU.busy=0;AU.phone="";AU.name=""},350)}
+function updateAuth(){var w=W[L];document.querySelectorAll(".js-auth").forEach(function(b){b.classList.toggle("me",!!ME);b.querySelector(".at").textContent=ME?ME.name:w.sign;b.querySelector(".av").textContent=ME?ME.name.charAt(0).toUpperCase():"👤"})}
+function authSend(){var w=W[L],p=nrm(AU.phone),r=reg();if(AU.tab=="up"&&!AU.name.trim())return fail(w.nn);if(!p)return fail(w.bad);if(AU.tab=="up"&&r[p])return fail(w.dup);if(AU.tab=="lg"&&!r[p])return fail(w.nf);AU.phone=p;AU.code=String(Math.floor(10000+Math.random()*90000));AU.step=2;AU.busy=0;authRender()}
+function authVerify(){if(AU.busy)return;var w=W[L],c=otpVal();if(c.length<5)return fail(w.short);if(c!==AU.code){fail(w.wr);document.querySelectorAll(".otp input").forEach(function(i){i.value="";i.classList.remove("f")});$(".otp input").focus();return}
+AU.busy=1;var r=reg();if(AU.tab=="up"){r[AU.phone]={name:AU.name.trim()};sset("arsin_users",JSON.stringify(r))}
+ME={name:r[AU.phone].name,phone:AU.phone};sset("arsin_me",JSON.stringify(ME));AU.step=3;authRender();updateAuth();setTimeout(authClose,1900)}
+document.addEventListener("click",function(e){if(e.target.closest(".js-auth")){closePop();authOpen();return}
+if(e.target.id=="am")return authClose();var b=e.target.closest("[data-a]");if(!b||!$("#am").contains(b))return;var k=b.dataset.a;
+if(k=="close")authClose();
+else if(k=="tab"){AU.tab=b.dataset.v;var tb=$(".tabs");tb.classList.toggle("lg",AU.tab=="lg");tb.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b)});var nm=$("#nm");if(AU.tab=="up"&&!nm)$("#ph").insertAdjacentHTML("beforebegin",nmf(W[L]));else if(AU.tab=="lg"&&nm)nm.remove();$("#er").textContent=""}
+else if(k=="send")authSend();else if(k=="ver")authVerify();
+else if(k=="edit"){AU.step=1;authRender()}
+else if(k=="resend"){AU.code=String(Math.floor(10000+Math.random()*90000));$("#dc").textContent=dg(AU.code);tick(1)}
+else if(k=="out"){ME=null;sset("arsin_me","");updateAuth();authClose()}});
+document.addEventListener("input",function(e){var t=e.target;if(t.id=="ph")AU.phone=t.value;else if(t.id=="nm")AU.name=t.value;else if(t.closest&&t.closest(".otp")){var d=ln(t.value).replace(/\D/g,"").slice(-1);t.value=d?dg(d):"";t.classList.toggle("f",!!d);if(d&&t.nextElementSibling)t.nextElementSibling.focus();if(otpVal().length==5)setTimeout(authVerify,250)}});
+document.addEventListener("keydown",function(e){var t=e.target;if(e.key=="Escape")authClose();else if(e.key=="Enter"&&(t.id=="ph"||t.id=="nm"))authSend();else if(e.key=="Backspace"&&t.closest&&t.closest(".otp")&&!t.value&&t.previousElementSibling){var p=t.previousElementSibling;p.value="";p.classList.remove("f");p.focus()}});
+document.addEventListener("paste",function(e){var t=e.target;if(!(t.closest&&t.closest(".otp")))return;e.preventDefault();var d=ln(e.clipboardData.getData("text")).replace(/\D/g,"").slice(0,5),ins=document.querySelectorAll(".otp input");for(var n=0;n<5;n++){ins[n].value=d.charAt(n)?dg(d.charAt(n)):"";ins[n].classList.toggle("f",!!d.charAt(n))}ins[Math.min(d.length,4)].focus();if(d.length==5)setTimeout(authVerify,250)});
+var top_=document.getElementById("top"),fab=document.getElementById("fab"),pop=document.getElementById("pop");
+pop.appendChild(top_.querySelector("nav").cloneNode(true));pop.appendChild(top_.querySelector(".ctl").cloneNode(true));
+function closePop(){fab.classList.remove("open")}
+document.addEventListener("click",function(e){
+  var lb=e.target.closest(".js-lang"),tb=e.target.closest(".js-theme");
+  if(lb)setLang(L=="fa"?"en":"fa");
+  else if(tb){var r=tb.getBoundingClientRect();setTheme(H.dataset.theme=="dark"?"light":"dark",r.left+r.width/2,r.top+r.height/2)}
+  else if(e.target.closest("#fabBtn"))fab.classList.toggle("open");
+  else if(!e.target.closest("#pop"))closePop();
+});
+function onScroll(){var g=scrollY>90;top_.classList.toggle("gone",g);fab.classList.toggle("show",g);if(!g)closePop()}
+addEventListener("scroll",onScroll,{passive:true});
+(function(){var l,t;try{l=localStorage.getItem("lang");t=localStorage.getItem("theme")}catch(e){}
+  t=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");H.dataset.theme=t;
+  L=l=="en"?"en":"fa";H.lang=L;H.dir=L=="fa"?"rtl":"ltr";render();onScroll()})();
+</script>
 </body>
 </html>
