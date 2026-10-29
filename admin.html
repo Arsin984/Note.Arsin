@@ -4,113 +4,138 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>پنل ادمین Music.Arsin (نمونه)</title>
+<title>پنل ادمین</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg1:#fff3e8;--bg2:#ffd2b0;--ink:#2a1a12;--mut:#7a5e4f;--card:rgba(255,255,255,.75);--bd:rgba(255,255,255,.9);--or1:#ffa65c;--or2:#ff6a3d;--mint:#19c9a8;--red:#e5484d;--sh:0 10px 30px rgba(180,90,30,.18)}
-@media (prefers-color-scheme:dark){:root{--bg1:#1a110d;--bg2:#2b1810;--ink:#fff1e6;--mut:#c9a995;--card:rgba(70,44,32,.7);--bd:rgba(255,200,160,.18);--sh:0 10px 30px rgba(0,0,0,.45)}}
+:root{--bg1:#fff3e8;--bg2:#ffd2b0;--ink:#2a1a12;--mut:#7a5e4f;--card:rgba(255,255,255,.78);--bd:rgba(255,255,255,.9);--or1:#ffa65c;--or2:#ff6a3d;--mint:#19c9a8;--red:#e5484d;--sh:0 10px 30px rgba(180,90,30,.18)}
+@media (prefers-color-scheme:dark){:root{--bg1:#1a110d;--bg2:#2b1810;--ink:#fff1e6;--mut:#c9a995;--card:rgba(70,44,32,.75);--bd:rgba(255,200,160,.18);--sh:0 10px 30px rgba(0,0,0,.45)}}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;color:var(--ink);font-family:"Vazirmatn",system-ui,sans-serif;background:linear-gradient(160deg,var(--bg1),var(--bg2));background-attachment:fixed;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
-button,input,select{font:inherit;color:inherit}button{cursor:pointer;border:0}
+button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;border:0}
 .wrap{max-width:960px;margin:0 auto;padding:16px}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:24px;box-shadow:var(--sh);padding:18px;margin-bottom:16px}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 h1{margin:0;font-size:22px}h2{margin:0 0 12px;font-size:18px}
 .btn{padding:10px 20px;border-radius:999px;font-weight:600;color:#fff;background:linear-gradient(135deg,var(--or1),var(--or2));transition:transform .2s}.btn:active{transform:scale(.95)}
 .btn.g{background:rgba(127,127,127,.18);color:var(--ink)}.btn.r{background:var(--red)}.btn.s{padding:6px 14px;font-size:13px}
-.warn{background:rgba(229,72,77,.12);border:1px dashed var(--red);border-radius:16px;padding:10px 14px;font-size:13px;line-height:1.9;margin-bottom:16px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:16px}
-.stats div{text-align:center;padding:14px;border-radius:20px;background:var(--card);border:1px solid var(--bd)}.stats b{display:block;font-size:26px;color:var(--or2)}.stats span{font-size:13px;color:var(--mut)}
 .tabs{display:flex;gap:8px;margin-bottom:14px}.tabs button{padding:8px 18px;border-radius:999px;background:rgba(127,127,127,.15)}.tabs .on{color:#fff;background:linear-gradient(135deg,var(--or1),var(--or2))}
-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
 label{font-size:13px;color:var(--mut);display:block}
-input,select{width:100%;margin-top:4px;padding:10px 14px;border-radius:14px;border:1.5px solid var(--bd);background:var(--card);outline:0}
-input:focus,select:focus{border-color:var(--or2)}
+input,select,textarea{width:100%;margin-top:4px;padding:10px 14px;border-radius:14px;border:1.5px solid var(--bd);background:var(--card);outline:0}
+textarea{min-height:90px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--or2)}
 .full{grid-column:1/-1}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:10px 8px;text-align:start;border-bottom:1px solid var(--bd);white-space:nowrap}th{color:var(--mut);font-weight:600}
 .tag{padding:2px 10px;border-radius:999px;font-size:12px;background:rgba(25,201,168,.18);color:var(--mint)}.tag.off{background:rgba(127,127,127,.2);color:var(--mut)}
-#gate{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;background:linear-gradient(160deg,var(--bg1),var(--bg2))}
-#gate .card{width:min(380px,100%);text-align:center}
-#gate input{text-align:center;margin:8px 0}#code{letter-spacing:8px;font-size:22px;font-weight:800}
-.err{color:var(--red);font-size:13px;min-height:20px}.demo{font-size:13px;color:var(--mint);margin:6px 0}
+.th{width:44px;height:44px;border-radius:10px;object-fit:cover;vertical-align:middle}
+.help{font-size:13px;color:var(--mut);line-height:2}
+.msg{position:fixed;inset-inline:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);max-width:520px;margin-inline:auto;padding:12px 18px;border-radius:18px;background:var(--mint);color:#fff;font-weight:600;text-align:center;transform:translateY(140%);transition:transform .4s;z-index:9}
+.msg.show{transform:none}.msg.bad{background:var(--red)}
 [hidden]{display:none!important}
 </style>
 </head>
 <body>
-<div id="gate"><div class="card">
-  <h1>ورود ادمین</h1>
-  <p style="color:var(--mut);font-size:14px">شمارهٔ موبایل ادمین را وارد کن.</p>
-  <div id="s1"><input id="ph" dir="ltr" inputmode="numeric" placeholder="09123456789"><div class="err" id="e1"></div><button class="btn" id="go" style="width:100%">دریافت کد</button></div>
-  <div id="s2" hidden><div class="demo">کد آزمایشی: <b id="dc"></b></div><input id="code" dir="ltr" inputmode="numeric" maxlength="5" placeholder="•••••"><div class="err" id="e2"></div><button class="btn" id="ok" style="width:100%">تأیید و ورود</button></div>
-</div></div>
+<div class="wrap">
+  <div class="card bar"><h1>پنل ادمین</h1><span class="help" id="who"></span></div>
 
-<div class="wrap" id="app" hidden>
-  <div class="card bar"><h1>پنل ادمین Music.Arsin</h1><button class="btn g s" id="out">خروج</button></div>
-  <div class="warn">⚠️ این نسخهٔ <b>نمونه و ظاهری</b> است. اطلاعات فقط در همین مرورگر ذخیره می‌شود و روی سایت اصلی اثری ندارد. این صفحه روی گیت‌هاب امنیت واقعی ندارد؛ پنل واقعی باید روی سرور خودت اجرا شود.</div>
-  <div class="stats"><div><b id="n1">0</b><span>کل محصولات</span></div><div><b id="n2">0</b><span>منتشرشده</span></div><div><b id="n3">0</b><span>سفارش نمونه</span></div></div>
-  <div class="tabs"><button class="on" data-t="p">محصولات</button><button data-t="o">سفارش‌ها</button></div>
-
-  <div id="tp">
-    <div class="card"><h2 id="ft">افزودن نت جدید</h2>
-      <form id="f">
-        <label>عنوان فارسی<input id="fa" required maxlength="80"></label>
-        <label>عنوان انگلیسی<input id="en" dir="ltr" maxlength="80"></label>
-        <label>ساز<select id="ins"><option value="piano">پیانو</option><option value="guitar">گیتار</option><option value="drums">درام</option><option value="violin">ویولن</option></select></label>
-        <label>سطح<select id="lv"><option value="0">مبتدی</option><option value="1">متوسط</option><option value="2">پیشرفته</option></select></label>
-        <label>قیمت (تومان)<input id="pr" type="number" min="0" step="1000" required></label>
-        <label>پیش‌نمایش (تصویر)<input id="f1" type="file" accept="image/*"></label>
-        <label>فایل نت (PDF)<input id="f2" type="file" accept="application/pdf"></label>
-        <label>ویدیوی آموزشی<input id="f3" type="file" accept="video/*"></label>
-        <label class="row"><input id="pub" type="checkbox" checked style="width:auto;margin:0"> منتشر شود</label>
-        <div class="full row"><button class="btn" type="submit">ذخیره</button><button class="btn g" type="button" id="cl">انصراف</button></div>
-      </form>
-      <p style="font-size:12px;color:var(--mut);margin:10px 0 0">در این نمونه فقط نام فایل‌ها ثبت می‌شود و خود فایل‌ها جایی آپلود نمی‌شوند.</p>
-    </div>
-    <div class="card tw"><h2>فهرست محصولات</h2><table><thead><tr><th>عنوان</th><th>ساز</th><th>سطح</th><th>قیمت</th><th>فایل‌ها</th><th>وضعیت</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+  <div class="card" id="cn">
+    <h2>اتصال به گیت‌هاب</h2>
+    <form id="cf">
+      <label>نام کاربری گیت‌هاب<input id="o" dir="ltr" value="Arsin984"></label>
+      <label>نام مخزن (repository)<input id="r" dir="ltr" value="Note.Arsin"></label>
+      <label>شاخه<input id="b" dir="ltr" value="main"></label>
+      <label>توکن گیت‌هاب<input id="t" dir="ltr" type="password" autocomplete="off" placeholder="github_pat_..."></label>
+      <label class="row full"><input id="rm" type="checkbox" style="width:auto;margin:0"> روی همین دستگاه به خاطر بسپار</label>
+      <div class="full"><button class="btn" type="submit">اتصال</button></div>
+    </form>
+    <p class="help">توکن مثل رمز مخزن توست؛ جایی منتشرش نکن و فقط روی دستگاه خودت وارد کن. فقط با توکن می‌شود تغییر داد؛ بدون آن، این صفحه کاری نمی‌تواند بکند.</p>
   </div>
 
-  <div id="to" hidden><div class="card tw"><h2>سفارش‌ها (نمونه)</h2><table><thead><tr><th>شماره</th><th>مشتری</th><th>محصول</th><th>مبلغ</th><th>وضعیت</th></tr></thead><tbody id="ob"></tbody></table></div></div>
+  <div id="app" hidden>
+    <div class="tabs"><button class="on" data-t="p">محصولات</button><button data-t="s">تنظیمات سایت</button></div>
+
+    <div id="tp">
+      <div class="card"><h2 id="ft">افزودن نت جدید</h2>
+        <form id="f">
+          <label>عنوان فارسی<input id="fa" required maxlength="80"></label>
+          <label>عنوان انگلیسی<input id="en" dir="ltr" maxlength="80"></label>
+          <label>ساز<select id="ins"><option value="piano">پیانو</option><option value="guitar">گیتار</option><option value="drums">درام</option><option value="violin">ویولن</option></select></label>
+          <label>سطح<select id="lv"><option value="0">مبتدی</option><option value="1">متوسط</option><option value="2">پیشرفته</option></select></label>
+          <label>قیمت (تومان)<input id="pr" type="number" min="0" step="1000" required></label>
+          <label>عکس پیش‌نمایش<input id="im" type="file" accept="image/*"></label>
+          <label class="full">لینک ویدیوی آموزشی (یوتیوب، آپارات یا mp4؛ باید با https شروع شود)<input id="vd" dir="ltr" placeholder="https://www.aparat.com/v/..."></label>
+          <label class="full">توضیح فارسی<textarea id="df"></textarea></label>
+          <label class="full">توضیح انگلیسی<textarea id="de" dir="ltr"></textarea></label>
+          <label class="row"><input id="pub" type="checkbox" checked style="width:auto;margin:0"> منتشر شود</label>
+          <div class="full row"><button class="btn" type="submit">ذخیره و انتشار</button><button class="btn g" type="button" id="cl">انصراف</button></div>
+        </form>
+        <p class="help">با هر ذخیره، تغییرات مستقیم داخل مخزن گیت‌هاب ثبت می‌شود و بعد از ۱ تا ۳ دقیقه روی سایت دیده می‌شود. همهٔ فایل‌های این مخزن عمومی‌اند؛ چیزی که نباید دیده شود اینجا نگذار.</p>
+      </div>
+      <div class="card tw"><h2>فهرست محصولات</h2><table><thead><tr><th></th><th>عنوان</th><th>ساز</th><th>سطح</th><th>قیمت</th><th>وضعیت</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+    </div>
+
+    <div id="ts" hidden><div class="card"><h2>تنظیمات سایت</h2>
+      <form id="sf">
+        <label>نام سایت<input id="sn" maxlength="40"></label>
+        <label>لوگو (عکس)<input id="lg" type="file" accept="image/*"></label>
+        <label class="full">عنوان صفحهٔ اول (فارسی)<input id="h1f" maxlength="120"></label>
+        <label class="full">توضیح صفحهٔ اول (فارسی)<textarea id="h2f"></textarea></label>
+        <label class="full">عنوان صفحهٔ اول (انگلیسی)<input id="h1e" dir="ltr" maxlength="120"></label>
+        <label class="full">توضیح صفحهٔ اول (انگلیسی)<textarea id="h2e" dir="ltr"></textarea></label>
+        <label>اینستاگرام (نام کاربری)<input id="ig" dir="ltr"></label>
+        <label>تلگرام (نام کاربری)<input id="tg" dir="ltr"></label>
+        <label>ایمیل<input id="em" dir="ltr" type="email"></label>
+        <label>تلفن<input id="ph" dir="ltr"></label>
+        <div class="full"><button class="btn" type="submit">ذخیره و انتشار</button></div>
+      </form></div></div>
+  </div>
 </div>
+<div id="st" class="msg"></div>
 
 <script>
-// شمارهٔ ادمین را اینجا بنویس (فقط برای نمونه؛ هر کسی کد صفحه را می‌خواند می‌تواند آن را ببیند)
-var ADMIN_PHONES=["09931936926"];
+var $=function(s){return document.querySelector(s)},nf=new Intl.NumberFormat("fa-IR");
 var INS={piano:"پیانو",guitar:"گیتار",drums:"درام",violin:"ویولن"},LVN=["مبتدی","متوسط","پیشرفته"];
-var $=function(s){return document.querySelector(s)},nf=new Intl.NumberFormat("fa-IR"),MEM={};
-function sg(k){try{var v=localStorage.getItem(k);if(v!==null)return v}catch(e){}return MEM[k]||null}
-function ss(k,v){MEM[k]=v;try{localStorage.setItem(k,v)}catch(e){}}
+var C={o:"",r:"",b:"main",t:""},P=[],S={},EID=null;
 function he(s){return String(s).replace(/[&<>"']/g,function(c){return "&#"+c.charCodeAt(0)+";"})}
-function ln(v){return String(v).replace(/[۰-۹]/g,function(d){return d.charCodeAt(0)-1776}).replace(/[٠-٩]/g,function(d){return d.charCodeAt(0)-1632}).replace(/\D/g,"")}
-var P=[];try{P=JSON.parse(sg("adm_products")||"null")}catch(e){}
-if(!Array.isArray(P))P=[{id:1,fa:"اتود مهتاب",en:"Moonlit Etude",ins:"piano",lv:0,pr:149000,pub:1,fl:[]},{id:2,fa:"غروب ساحل",en:"Beach Sunset",ins:"guitar",lv:0,pr:129000,pub:1,fl:[]},{id:3,fa:"ضرب اول",en:"First Beat",ins:"drums",lv:0,pr:99000,pub:0,fl:[]}];
-var ORD=[[1001,"۰۹۱۲…۱۲۳۴","اتود مهتاب",149000,"پرداخت‌شده"],[1002,"۰۹۳۵…۵۶۷۸","غروب ساحل",129000,"پرداخت‌شده"],[1003,"۰۹۰۱…۹۹۰۰","ضرب اول",99000,"در انتظار"]];
-var EID=null;
-function save(){ss("adm_products",JSON.stringify(P))}
+function msg(t,bad){var e=$("#st");e.textContent=t;e.className="msg show"+(bad?" bad":"");clearTimeout(msg.h);msg.h=setTimeout(function(){e.className="msg"},bad?7000:4000)}
+function busy(x){$("#app").style.opacity=x?.5:1;$("#app").style.pointerEvents=x?"none":""}
+function api(m,path,body){return fetch("https://api.github.com/repos/"+encodeURIComponent(C.o)+"/"+encodeURIComponent(C.r)+path,{method:m,headers:{Authorization:"Bearer "+C.t,Accept:"application/vnd.github+json"},body:body?JSON.stringify(body):undefined}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.message||("خطا "+r.status));return j})})}
+function b64(s){var b=new TextEncoder().encode(s),o="";for(var i=0;i<b.length;i+=8192)o+=String.fromCharCode.apply(null,b.subarray(i,i+8192));return btoa(o)}
+function getJson(path,def){return api("GET","/contents/"+path+"?ref="+encodeURIComponent(C.b)+"&t="+Date.now()).then(function(j){var bin=atob(j.content.replace(/\n/g,"")),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return{sha:j.sha,data:JSON.parse(new TextDecoder().decode(u))}}).catch(function(e){if(/not found/i.test(e.message))return{sha:null,data:def};throw e})}
+function putFile(path,content,sha,m){var o={message:m,content:content,branch:C.b};if(sha)o.sha=sha;return api("PUT","/contents/"+path,o)}
+function saveJson(path,obj,m){return getJson(path,null).then(function(c){return putFile(path,b64(JSON.stringify(obj,null,1)),c.sha,m)})}
+function img2b64(file,max,mime){return new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);res(c.toDataURL(mime,.82).split(",")[1])};im.onerror=function(){rej(new Error("عکس خوانده نشد."))};im.src=fr.result};fr.onerror=rej;fr.readAsDataURL(file)})}
+function upImg(file,max,mime,name){return img2b64(file,max,mime).then(function(b){var p="uploads/"+name+"-"+Date.now()+(mime=="image/png"?".png":".jpg");return putFile(p,b,null,"upload "+name).then(function(){return p})})}
 function draw(){
-  $("#tb").innerHTML=P.map(function(p){return '<tr><td>'+he(p.fa)+'</td><td>'+INS[p.ins]+'</td><td>'+LVN[p.lv]+'</td><td>'+nf.format(p.pr)+'</td><td>'+(p.fl.length?he(p.fl.join("، ")):"—")+'</td><td><span class="tag '+(p.pub?"":"off")+'">'+(p.pub?"منتشر":"پیش‌نویس")+'</span></td><td class="row"><button class="btn g s" data-e="'+p.id+'">ویرایش</button><button class="btn r s" data-d="'+p.id+'">حذف</button></td></tr>'}).join("")||'<tr><td colspan="7">هنوز محصولی نیست.</td></tr>';
-  $("#ob").innerHTML=ORD.map(function(o){return '<tr><td>'+nf.format(o[0])+'</td><td>'+o[1]+'</td><td>'+o[2]+'</td><td>'+nf.format(o[3])+'</td><td><span class="tag '+(o[4]=="پرداخت‌شده"?"":"off")+'">'+o[4]+'</span></td></tr>'}).join("");
-  $("#n1").textContent=nf.format(P.length);$("#n2").textContent=nf.format(P.filter(function(p){return p.pub}).length);$("#n3").textContent=nf.format(ORD.length)}
+  $("#tb").innerHTML=P.map(function(p){return '<tr><td>'+(p.img?'<img class="th" src="../'+he(p.img)+'" alt="">':'')+'</td><td>'+he(p.fa)+'</td><td>'+INS[p.inst]+'</td><td>'+LVN[p.lv]+'</td><td>'+nf.format(p.pr)+'</td><td><span class="tag '+(p.pub?"":"off")+'">'+(p.pub?"منتشر":"پیش‌نویس")+'</span></td><td class="row"><button class="btn g s" data-e="'+p.id+'">ویرایش</button><button class="btn g s" data-v="'+p.id+'">'+(p.pub?"مخفی":"انتشار")+'</button><button class="btn r s" data-d="'+p.id+'">حذف</button></td></tr>'}).join("")||'<tr><td colspan="7">هنوز محصولی نیست.</td></tr>'}
 function reset(){EID=null;$("#f").reset();$("#ft").textContent="افزودن نت جدید"}
-$("#f").addEventListener("submit",function(e){e.preventDefault();
-  var fl=[];["f1","f2","f3"].forEach(function(id){var f=$("#"+id).files[0];if(f)fl.push(f.name)});
-  var o={fa:$("#fa").value.trim(),en:$("#en").value.trim(),ins:$("#ins").value,lv:+$("#lv").value,pr:Math.max(0,+$("#pr").value||0),pub:$("#pub").checked?1:0,fl:fl};
-  if(EID){var p=P.filter(function(x){return x.id==EID})[0];if(p){if(!fl.length)o.fl=p.fl;for(var k in o)p[k]=o[k]}}
-  else{o.id=Date.now();P.push(o)}
-  save();reset();draw()});
+function savePs(m,ok){busy(1);return saveJson("data/products.json",P,m).then(function(){msg(ok||"ذخیره شد. تا چند دقیقهٔ دیگر روی سایت دیده می‌شود.");draw()}).catch(function(e){msg("خطا: "+e.message,1)}).then(function(){busy(0)})}
+function fill(){var s=S;$("#sn").value=s.name||"";$("#h1f").value=s.h1f||"";$("#h2f").value=s.h2f||"";$("#h1e").value=s.h1e||"";$("#h2e").value=s.h2e||"";$("#ig").value=s.ig||"";$("#tg").value=s.tg||"";$("#em").value=s.em||"";$("#ph").value=s.ph||""}
+function connect(c,quiet){C=c;if(!C.o||!C.r||!C.t)return msg("همهٔ فیلدها را پر کن.",1);
+  api("GET","").then(function(){return Promise.all([getJson("data/products.json",[]),getJson("data/settings.json",{})])}).then(function(r){
+    P=Array.isArray(r[0].data)?r[0].data:[];S=r[1].data||{};fill();draw();$("#cn").hidden=true;$("#app").hidden=false;$("#who").textContent=C.o+" / "+C.r;
+    try{sessionStorage.setItem("gh",JSON.stringify(C));if($("#rm").checked)localStorage.setItem("gh",JSON.stringify(C))}catch(e){}
+    if(!quiet)msg("وصل شدی.")}).catch(function(e){msg("اتصال نشد: "+e.message,1)})}
+$("#cf").addEventListener("submit",function(e){e.preventDefault();connect({o:$("#o").value.trim(),r:$("#r").value.trim(),b:$("#b").value.trim()||"main",t:$("#t").value.trim()})});
+$("#f").addEventListener("submit",function(e){e.preventDefault();var f=$("#im").files[0],vd=$("#vd").value.trim();
+  if(vd&&!/^https:\/\//i.test(vd))return msg("لینک ویدیو باید با https شروع شود.",1);
+  var old=EID?P.filter(function(x){return x.id==EID})[0]:null,o={inst:$("#ins").value,fa:$("#fa").value.trim(),en:$("#en").value.trim(),lv:+$("#lv").value,pr:Math.max(0,+$("#pr").value||0),vd:vd,df:$("#df").value.trim(),de:$("#de").value.trim(),pub:$("#pub").checked?1:0,img:old?old.img:""};
+  busy(1);
+  (f?upImg(f,900,"image/jpeg","img"):Promise.resolve(null)).then(function(p){if(p)o.img=p;
+    if(old){for(var k in o)old[k]=o[k]}else{o.id=Date.now();P.push(o)}
+    return saveJson("data/products.json",P,"update products")}).then(function(){msg("ذخیره شد. تا چند دقیقهٔ دیگر روی سایت دیده می‌شود.");reset();draw()}).catch(function(e){msg("خطا: "+e.message,1)}).then(function(){busy(0)})});
 $("#cl").onclick=reset;
-document.addEventListener("click",function(e){var b=e.target.closest("[data-e],[data-d]");
-  if(b&&b.dataset.d&&confirm("این محصول حذف شود؟")){P=P.filter(function(x){return x.id!=b.dataset.d});save();draw()}
-  else if(b&&b.dataset.e){var p=P.filter(function(x){return x.id==b.dataset.e})[0];if(!p)return;EID=p.id;$("#fa").value=p.fa;$("#en").value=p.en;$("#ins").value=p.ins;$("#lv").value=p.lv;$("#pr").value=p.pr;$("#pub").checked=!!p.pub;$("#ft").textContent="ویرایش نت";scrollTo({top:0,behavior:"smooth"})}
-  var t=e.target.closest("[data-t]");if(t){document.querySelectorAll(".tabs button").forEach(function(x){x.classList.toggle("on",x===t)});$("#tp").hidden=t.dataset.t!="p";$("#to").hidden=t.dataset.t!="o"}});
-/* ورود آزمایشی */
-var CODE="",PH="";
-function show(){$("#gate").hidden=true;$("#app").hidden=false;draw()}
-if(sessionStorage&&sessionStorage.getItem("adm_ok")=="1")try{show()}catch(e){}
-$("#go").onclick=function(){var p=ln($("#ph").value);if(ADMIN_PHONES.indexOf(p)<0){$("#e1").textContent="این شماره ادمین نیست.";return}
-  PH=p;CODE=String(Math.floor(10000+Math.random()*90000));$("#dc").textContent=CODE;$("#s1").hidden=true;$("#s2").hidden=false;$("#e1").textContent="";$("#code").focus()};
-$("#ok").onclick=function(){if(ln($("#code").value)==CODE){try{sessionStorage.setItem("adm_ok","1")}catch(e){}show()}else{$("#e2").textContent="کد اشتباه است.";$("#code").value=""}};
-$("#code").addEventListener("input",function(){if(ln(this.value).length==5)$("#ok").click()});
-$("#out").onclick=function(){try{sessionStorage.removeItem("adm_ok")}catch(e){}location.reload()};
+$("#sf").addEventListener("submit",function(e){e.preventDefault();var f=$("#lg").files[0];busy(1);
+  (f?upImg(f,256,"image/png","logo"):Promise.resolve(null)).then(function(p){
+    S={name:$("#sn").value.trim(),logo:p||S.logo||"",h1f:$("#h1f").value.trim(),h2f:$("#h2f").value.trim(),h1e:$("#h1e").value.trim(),h2e:$("#h2e").value.trim(),ig:$("#ig").value.trim(),tg:$("#tg").value.trim(),em:$("#em").value.trim(),ph:$("#ph").value.trim()};
+    return saveJson("data/settings.json",S,"update settings")}).then(function(){msg("تنظیمات ذخیره شد. تا چند دقیقهٔ دیگر روی سایت دیده می‌شود.")}).catch(function(e){msg("خطا: "+e.message,1)}).then(function(){busy(0)})});
+document.addEventListener("click",function(e){var b=e.target.closest("[data-e],[data-d],[data-v],[data-t]");if(!b)return;
+  if(b.dataset.t){document.querySelectorAll(".tabs button").forEach(function(x){x.classList.toggle("on",x===b)});$("#tp").hidden=b.dataset.t!="p";$("#ts").hidden=b.dataset.t!="s";return}
+  var id=b.dataset.e||b.dataset.d||b.dataset.v,p=P.filter(function(x){return x.id==id})[0];if(!p)return;
+  if(b.dataset.d){if(confirm("این محصول حذف شود؟")){P=P.filter(function(x){return x.id!=id});savePs("delete product","حذف شد.")}}
+  else if(b.dataset.v){p.pub=p.pub?0:1;savePs("toggle product")}
+  else{EID=p.id;$("#fa").value=p.fa;$("#en").value=p.en||"";$("#ins").value=p.inst;$("#lv").value=p.lv;$("#pr").value=p.pr;$("#vd").value=p.vd||"";$("#df").value=p.df||"";$("#de").value=p.de||"";$("#pub").checked=!!p.pub;$("#ft").textContent="ویرایش نت";scrollTo({top:0,behavior:"smooth"})}});
+(function(){var s=null;try{s=JSON.parse(sessionStorage.getItem("gh")||localStorage.getItem("gh")||"null")}catch(e){}if(s&&s.t)connect(s,1)})();
 </script>
 </body>
 </html>
